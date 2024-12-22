@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "inverter.h": "c",
+        "table_reference.h": "c",
+        "moduration.h": "c"
+    }
+}

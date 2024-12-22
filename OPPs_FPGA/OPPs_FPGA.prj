@@ -1,0 +1,10 @@
+[COMPONENT]
+CONF	"OPPs_FPGA.bat" "OPPs_FPGA.cmd" 	# :2024年9月15日 14:24:53
+OBJ	"$(PEOS_PATH)\lib\Main.obj" "$(PEOS_PATH)\lib\mwio4.lib" "$(MATHLIB_PATH)\lib\mathlib.ae66" "$(COMPILER_PATH)/../lib/rts6600_elf.lib" "$(CSL_PATH)/lib/ti.csl.ae66" "$(CSL_PATH)/lib/ti.csl.intc.ae66" 	# :2024年9月15日 14:24:53
+HEADER	"$(PROJECT_PATH)" "$(PEOS_PATH)\inc" "$(COMPILER_PATH)\..\include" "$(CSL_PATH)" "$(MATHLIB_PATH)\inc" "$(MATHLIB_PATH)\packages" "$(CSL_PATH)\..\.." 	# :2024年9月15日 14:24:53
+SRC	"OPPs_FPGA.c" "lib\moduration.c" 	# :2024年9月15日 14:24:53
+[CONFIGURE]
+AUTO_MAKE	"YES" 	# :2024年9月15日 14:24:53
+STOP_RECONF	"NO" 	# :2024年9月15日 14:24:53
+PEOS_VER	"3_12" 	# :2024年9月15日 14:24:53
+TARGET_TYPE	"c6657" 	# :2024年9月15日 14:24:53
