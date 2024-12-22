@@ -38,32 +38,32 @@ static uint8_t SwitchingCountTable[8] = {
  * @brief switching state (8 voltage vectors X 3 phases)
  * 
  */
-static bool SwitchingState[8][3] = {
-    {0, 0, 0},
-    {1, 0, 0},
-    {1, 1, 0},
-    {0, 1, 0},
-    {0, 1, 1},
-    {0, 0, 1},
-    {1, 0, 1},
-    {1, 1, 1}
-};
+// static bool SwitchingState[8][3] = {
+//     {0, 0, 0},
+//     {1, 0, 0},
+//     {1, 1, 0},
+//     {0, 1, 0},
+//     {0, 1, 1},
+//     {0, 0, 1},
+//     {1, 0, 1},
+//     {1, 1, 1}
+// };
 
 /**
  * @brief normalized voltage references
  * which can realize each voltage vector
  * 
  */
-static int8_t ModulationSwitchingState[8][3] = {
-    {-2, -2, -2},
-    { 2, -2, -2},
-    { 2,  2, -2},
-    {-2,  2, -2},
-    {-2,  2,  2},
-    {-2, -2,  2},
-    { 2, -2,  2},
-    { 2,  2,  2}
-};
+// static int8_t ModulationSwitchingState[8][3] = {
+//     {-2, -2, -2},
+//     { 2, -2, -2},
+//     { 2,  2, -2},
+//     {-2,  2, -2},
+//     {-2,  2,  2},
+//     {-2, -2,  2},
+//     { 2, -2,  2},
+//     { 2,  2,  2}
+// };
 
 
 
@@ -148,24 +148,83 @@ int8_t Inv_CalcNVRFromVV(uint8_t vv, uint8_t phase){
  * @return true 
  * @return false 
  */
-bool Inv_UpdateSwitchingCount(Inv_InverterParam* ip, uint8_t VoltageVector, uint8_t ConstCount){
-    unsigned int SWCnt_tmp = 0;
-    unsigned int MaxSwFreqCalcCycleCnt = (int)(CONTROL_FREQ/SWITCHING_FREQ_CALC_CYCLE);
-    static unsigned int SwFreqCalcCycleCnt = 0;
-    static unsigned int SWCnt_zfreq = 0;
+// bool Inv_UpdateSwitchingCount(Inv_InverterParam* ip, uint8_t VoltageVector, uint8_t ConstCount){
+//     unsigned int SWCnt_tmp = 0;
+//     unsigned int MaxSwFreqCalcCycleCnt = (int)(CONTROL_FREQ/SWITCHING_FREQ_CALC_CYCLE);
+//     static unsigned int SwFreqCalcCycleCnt = 0;
+//     static unsigned int SWCnt_zfreq = 0;
 
-    if(ConstCount==0){
-        SWCnt_tmp = ip->SWCnt + Inv_CalcSwitchingCount(ip, VoltageVector);
-    }else{
-        SWCnt_tmp = ip->SWCnt + ConstCount;
-    }
-    ip->SWCnt = SWCnt_tmp;
-    SwFreqCalcCycleCnt += 1;
+//     if(ConstCount==0){
+//         SWCnt_tmp = ip->SWCnt + Inv_CalcSwitchingCount(ip, VoltageVector);
+//     }else{
+//         SWCnt_tmp = ip->SWCnt + ConstCount;
+//     }
+//     ip->SWCnt = SWCnt_tmp;
+//     SwFreqCalcCycleCnt += 1;
     
-    if(MaxSwFreqCalcCycleCnt == SwFreqCalcCycleCnt){
-        ip->SWFreq = (SWCnt_tmp - SWCnt_zfreq) * SWITCHING_FREQ_CALC_CYCLE;
-        SWCnt_zfreq = SWCnt_tmp;
-        SwFreqCalcCycleCnt = 0;
+//     if(MaxSwFreqCalcCycleCnt == SwFreqCalcCycleCnt){
+//         ip->SWFreq = (SWCnt_tmp - SWCnt_zfreq) * SWITCHING_FREQ_CALC_CYCLE;
+//         SWCnt_zfreq = SWCnt_tmp;
+//         SwFreqCalcCycleCnt = 0;
+//     }
+//     return 0;
+// }
+
+bool SF_calculation_Constract(Switching_Instance *SW_Inst){
+    int i, j;
+    int8_t *UVW_Edge[3];
+
+    UVW_Edge[0] = SW_Inst->U_Edge;
+    UVW_Edge[1] = SW_Inst->V_Edge;
+    UVW_Edge[2] = SW_Inst->W_Edge;
+
+    for(i = 0; i < 3; i++){
+        for(j = 0; j < 3; j++){
+            UVW_Edge[i][j] = 0;
+        }
     }
-    return 0;
+    SW_Inst->UVW_Edge_Count = 0;
+    SW_Inst->Counter = 0;
+    SW_Inst->Timer = 0;
 }
+
+bool SF_calculation(Switching_Instance *SW_Inst, float Ts){
+    float average_time = 1.0;
+    int i;
+    int8_t *UVW_Edge[3];
+
+    UVW_Edge[0] = SW_Inst->U_Edge;
+    UVW_Edge[1] = SW_Inst->V_Edge;
+    UVW_Edge[2] = SW_Inst->W_Edge;
+
+    SW_Inst->Counter++;
+
+    for(i = 0; i < 3; i++){
+        if(UVW_Edge[i][0] > UVW_Edge[i][1]){
+            SW_Inst->UVW_Edge_Count++;
+        }
+        // 前回値を現在値に更新
+        UVW_Edge[i][1] = UVW_Edge[i][0];
+    }
+
+    SW_Inst->Timer = Ts*SW_Inst->UVW_Edge_Count;
+
+    if(SW_Inst->Timer > average_time){
+        SW_Inst->SF_average = SW_Inst->UVW_Edge_Count/SW_Inst->Timer;
+        SW_Inst->Counter = 0;
+        SW_Inst->UVW_Edge_Count = 0;
+    }
+}
+
+    // if(SW_Inst->U_Edge[0] > SW_Inst->U_Edge[1]){
+    //     SW_Inst->UVW_Edge_Count++;
+    // }
+    // if(SW_Inst->V_Edge[0] > SW_Inst->V_Edge[1]){
+    //     SW_Inst->UVW_Edge_Count++;
+    // }
+    // if(SW_Inst->W_Edge[0] > SW_Inst->W_Edge[1]){
+    //     SW_Inst->UVW_Edge_Count++;
+    // }
+    // SW_Inst->U_Edge[1] = SW_Inst->U_Edge[0];
+    // SW_Inst->V_Edge[1] = SW_Inst->V_Edge[0];
+    // SW_Inst->W_Edge[1] = SW_Inst->W_Edge[0];

@@ -1,9 +1,6 @@
 #ifndef OPPS_FPGA
 #define OPPS_FPGA
 
-
-
-
 #include <mwio4.h>
 #include <math.h>
 

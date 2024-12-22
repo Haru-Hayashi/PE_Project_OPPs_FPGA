@@ -4,7 +4,7 @@
 // *** header file include *** //
 #include "Common.h"
 #include "../UserDefined.h"
-// #include "Vector.h"
+#include "Vector.h"
 // *** macro definition *** //
 
 // *** variable definition *** //

@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "opps_fpga.h": "c",
+        "inductionmotor.h": "c",
+        "dspboard.h": "c",
+        "moduration.h": "c",
+        "stdio.h": "c",
+        "integrator.h": "c",
+        "stdbool.h": "c"
+    }
+}

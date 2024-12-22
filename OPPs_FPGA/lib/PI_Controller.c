@@ -3,6 +3,18 @@
 
 #define PI 3.14159265358979
 
+void PI_Controller_init(PI_def *PI_Control){
+    PI_Control->err[0] = 0.0;
+    PI_Control->err[1] = 0.0;
+    PI_Control->output[0] = 0.0;
+    PI_Control->output[1] = 0.0;
+    PI_Control->prop_out = 0.0;
+    PI_Control->inte_out = 0.0;
+    PI_Control->limit_err_fb_gain = 0.0;
+    PI_Control->limit_err_fb = 0.0;
+
+}
+
 
 
 void PI_Controller(PI_def *PI_Control, float Kp, float Ki, float Ts, float limit_value, float err_inte1, float *err_inte2){

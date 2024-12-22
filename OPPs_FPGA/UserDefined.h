@@ -1,40 +1,26 @@
 #ifndef USERDEFINED_H_
 #define USERDEFINED_H_
 
-// *** header file include *** //
-// #define MATLAB_SIM
-#ifndef MATLAB_SIM
-    #include <mwio4.h>
-#else
-    #include "mwio4.h"
-#endif
+#include <mwio4.h>
 #include <math.h>
 
-// *** macro definition *** //
-// * 制御設定 * //
-// #define HILS_ENVIRONMENT
-#define DEADTIME_COMPENSATE
+#define far
 
-#ifndef HILS_ENVIRONMENT
-    // #define CONTROL_FREQ 2000
-    // #define SAMPLING_FREQ 40000
-    #define CTRL_BDN 0      //BoarD Number for control default→0
-    #define SENS_BDN 0      //BoarD Number for sensor  default→1
-    #define FPGA_BDN 4
-#else
-    #define FS 40000
-    #define CONTROL_FREQ 40000
-    #define SAMPLING_FREQ CONTROL_FREQ
-    #define CTRL_BDN 0
-    #define SENS_BDN 0
-#endif
+// #define NOMINAL_MODE
+
+// * 制御設定 * //
+
+// #define CONTROL_FREQ 2000
+// #define SAMPLING_FREQ 40000
+#define CTRL_BDN 0      //BoarD Number for control default→0
+#define SENS_BDN 0      //BoarD Number for sensor  default→1
+#define DAC_BDN 3
+#define FPGA_BDN 4
 
 #define REF_UPDATE_FREQ CONTROL_FREQ    // 電圧指令値更新周波数は合わせる
 #define DEADTIME 200
 #define ENC_MAX 8191    //2048*4=2^13
-#ifndef M_PI
-    #define M_PI 3.14159
-#endif
+#define M_PI 3.14159
 // * センサ設定 * //
 #define CURRENT_SENSOR_RANGE 50.0/3.0//12.5
 #define DCLINK_VOLTAGE_RANGE 1016
@@ -44,11 +30,16 @@
 // * 帯域設定 * //
 #define BW_OMEGARE 800  //速度応答ローパス
 
-// *** type definition *** //
+// * 零近似（計算結果において完全な0は存在しない） * //
+#define I1_EPSILON (1e-3) //-2
+#define EPSILON (1e-3)
 
-// *** prototype definition *** //
-int rnd(float val);
+// 定格速度で最大変調率 → Vdc/(sqrt(2)*360)=0.5539
+#define K_VF 0.5539
 
-// *** prototype definition (static)*** //
+// ASPSのテーブル書き込み分割数
+#define WRITE_DIVISION 4
+#define MAXIMUM_TABLE_SIZE 129
+
 
 #endif
