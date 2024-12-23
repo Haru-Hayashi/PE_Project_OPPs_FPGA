@@ -205,7 +205,7 @@
       <i_NormWin1Win4>2</i_NormWin1Win4>
       <Button_Name>Win3</Button_Name>
       <bColorPickerIndex>16</bColorPickerIndex>
-      <bNormVariableIndex>49</bNormVariableIndex>
+      <bNormVariableIndex>48</bNormVariableIndex>
     </BindWaveNormRec>
     <BindWaveNormRec>
       <PrebNormPosValue>0</PrebNormPosValue>
@@ -219,7 +219,7 @@
       <i_NormWin1Win4>3</i_NormWin1Win4>
       <Button_Name>Win4</Button_Name>
       <bColorPickerIndex>17</bColorPickerIndex>
-      <bNormVariableIndex>45</bNormVariableIndex>
+      <bNormVariableIndex>44</bNormVariableIndex>
     </BindWaveNormRec>
     <BindWaveNormRec>
       <PrebNormPosValue>0</PrebNormPosValue>
@@ -233,7 +233,7 @@
       <i_NormWin1Win4>3</i_NormWin1Win4>
       <Button_Name>Win4</Button_Name>
       <bColorPickerIndex>8</bColorPickerIndex>
-      <bNormVariableIndex>44</bNormVariableIndex>
+      <bNormVariableIndex>43</bNormVariableIndex>
     </BindWaveNormRec>
     <BindWaveNormRec>
       <PrebNormPosValue>0</PrebNormPosValue>
@@ -931,7 +931,6 @@
     <string>iv_res</string>
     <string>iw_res</string>
     <string>j</string>
-    <string>Kvf</string>
     <string>max</string>
     <string>min</string>
     <string>mod</string>
@@ -957,6 +956,7 @@
     <string>SAMPLING_FREQ</string>
     <string>sf_ave</string>
     <string>sf_ave2</string>
+    <string>SF_average</string>
     <string>sf_u_ave</string>
     <string>sf_v_ave</string>
     <string>sf_w_ave</string>
@@ -977,9 +977,6 @@
     <string>trans_time_first</string>
     <string>TS</string>
     <string>TS_SAMPLE</string>
-    <string>tu</string>
-    <string>tv</string>
-    <string>tw</string>
     <string>u</string>
     <string>u_sw</string>
     <string>uvw_sw</string>

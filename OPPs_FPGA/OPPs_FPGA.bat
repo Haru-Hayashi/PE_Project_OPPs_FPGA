@@ -28,7 +28,13 @@
 @rem *** Objects & Libraries ***
 @set OBJS=^
 	OPPs_FPGA.obj ^
-	moduration.obj
+	moduration.obj ^
+	Common.obj ^
+	DSPBoard.obj ^
+	InductionMotor.obj ^
+	Inverter.obj ^
+	LowPassFilter.obj ^
+	Vector.obj
 
 @set LIBS="C:\Program Files (x86)\Myway Plus\PE-ViewX\pe-viewx\PEOS\c6657\3_12\lib\Main.obj" ^
  "C:\Program Files (x86)\Myway Plus\PE-ViewX\pe-viewx\PEOS\c6657\3_12\lib\mwio4.lib" ^
@@ -42,26 +48,50 @@
 @set SYMBOL=^
 	OPPs_FPGA.@sbl ^
 	 + moduration.@sbl ^
+	 + Common.@sbl ^
+	 + DSPBoard.@sbl ^
+	 + InductionMotor.@sbl ^
+	 + Inverter.@sbl ^
+	 + LowPassFilter.@sbl ^
+	 + Vector.@sbl ^
  
 
 @set SYMBOL_CLEAR=^
 	OPPs_FPGA.@sbl ^
 	moduration.@sbl ^
+	Common.@sbl ^
+	DSPBoard.@sbl ^
+	InductionMotor.@sbl ^
+	Inverter.@sbl ^
+	LowPassFilter.@sbl ^
+	Vector.@sbl ^
  
 
 @set FUNCSYMBOL=^
 	OPPs_FPGA.@funcsbl ^
 	 + moduration.@funcsbl ^
+	 + Common.@funcsbl ^
+	 + DSPBoard.@funcsbl ^
+	 + InductionMotor.@funcsbl ^
+	 + Inverter.@funcsbl ^
+	 + LowPassFilter.@funcsbl ^
+	 + Vector.@funcsbl ^
  
 
 @set FUNCSYMBOL_CLEAR=^
 	OPPs_FPGA.@funcsbl ^
 	moduration.@funcsbl ^
+	Common.@funcsbl ^
+	DSPBoard.@funcsbl ^
+	InductionMotor.@funcsbl ^
+	Inverter.@funcsbl ^
+	LowPassFilter.@funcsbl ^
+	Vector.@funcsbl ^
  
 
 
 @rem *** Flags ***
-@set BASE_CFLAGS=-mv6600 --display_error_number --preproc_with_compile --diag_warning=225 --abi=eabi -O2 -i"C:/Users/ohlab/Documents/Hayashi/OPPs_FPGA" -i"C:/Program Files (x86)/Myway Plus/PE-ViewX/pe-viewx/PEOS/c6657/3_12/inc" -i"C:/ti/c6000_7.4.24/bin/../include" -i"C:/ti/pdk_C6657_1_1_2_6/packages/ti/csl" -i"C:/ti/mathlib_c66x_3_0_1_1/inc" -i"C:/ti/mathlib_c66x_3_0_1_1/packages" -i"C:/ti/pdk_C6657_1_1_2_6/packages/ti/csl/../.."
+@set BASE_CFLAGS=-mv6600 --display_error_number --preproc_with_compile --diag_warning=225 --abi=eabi -O2 -i"D:/Hayashi/Remoto/PE_Project_OPPs_FPGA/OPPs_FPGA" -i"C:/Program Files (x86)/Myway Plus/PE-ViewX/pe-viewx/PEOS/c6657/3_12/inc" -i"C:/ti/c6000_7.4.24/bin/../include" -i"C:/ti/pdk_C6657_1_1_2_6/packages/ti/csl" -i"C:/ti/mathlib_c66x_3_0_1_1/inc" -i"C:/ti/mathlib_c66x_3_0_1_1/packages" -i"C:/ti/pdk_C6657_1_1_2_6/packages/ti/csl/../.."
 @set CFLAGS=%BASE_CFLAGS% -k
 @set ASMFLAGS=%BASE_CFLAGS%
 @set LDFLAGS=--run_linker --rom_model --map_file=%TARGET%.map -l=%LIBS% -l=%TARGET%.cmd --zero_init=off 
@@ -96,6 +126,78 @@ del OPPs_FPGA.asm 2> nul
 %MAKE_FUNCSBL% moduration.asm moduration.@funcsbl
 @echo off & if errorlevel 1 goto ERR
 del moduration.asm 2> nul
+@echo on
+
+
+%CC% %CFLAGS% lib\Common.c
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_SBL% Common.asm Common.@sbl
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_FUNCSBL% Common.asm Common.@funcsbl
+@echo off & if errorlevel 1 goto ERR
+del Common.asm 2> nul
+@echo on
+
+
+%CC% %CFLAGS% lib\DSPBoard.c
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_SBL% DSPBoard.asm DSPBoard.@sbl
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_FUNCSBL% DSPBoard.asm DSPBoard.@funcsbl
+@echo off & if errorlevel 1 goto ERR
+del DSPBoard.asm 2> nul
+@echo on
+
+
+%CC% %CFLAGS% lib\InductionMotor.c
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_SBL% InductionMotor.asm InductionMotor.@sbl
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_FUNCSBL% InductionMotor.asm InductionMotor.@funcsbl
+@echo off & if errorlevel 1 goto ERR
+del InductionMotor.asm 2> nul
+@echo on
+
+
+%CC% %CFLAGS% lib\Inverter.c
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_SBL% Inverter.asm Inverter.@sbl
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_FUNCSBL% Inverter.asm Inverter.@funcsbl
+@echo off & if errorlevel 1 goto ERR
+del Inverter.asm 2> nul
+@echo on
+
+
+%CC% %CFLAGS% lib\LowPassFilter.c
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_SBL% LowPassFilter.asm LowPassFilter.@sbl
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_FUNCSBL% LowPassFilter.asm LowPassFilter.@funcsbl
+@echo off & if errorlevel 1 goto ERR
+del LowPassFilter.asm 2> nul
+@echo on
+
+
+%CC% %CFLAGS% lib\Vector.c
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_SBL% Vector.asm Vector.@sbl
+@echo off & if errorlevel 1 goto ERR
+@echo on
+%MAKE_FUNCSBL% Vector.asm Vector.@funcsbl
+@echo off & if errorlevel 1 goto ERR
+del Vector.asm 2> nul
 @echo on
 
 

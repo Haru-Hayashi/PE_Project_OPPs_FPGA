@@ -4,8 +4,6 @@
 #include <mwio4.h>
 #include <math.h>
 
-#define far
-
 // #define NOMINAL_MODE
 
 // * 制御設定 * //

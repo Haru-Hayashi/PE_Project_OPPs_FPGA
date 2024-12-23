@@ -17,8 +17,7 @@
 #include "lib/DSPBoard.h"
 #include "lib/InductionMotor.h"
 #include "lib/Inverter.h"
-#include "lib/Table_Reference.h"
-#include "lib/Integrator.h"
+#include "lib/moduration.h"
 
 // ******* プロトタイプ宣言 ******* //
 interrupt void IntrFunc1(void); // 制御ループ関数
@@ -86,7 +85,7 @@ float Vdc = 0.0;
 float Vdc_sens = 0.0;
 float t_res = 0.0;
 float V_limit = 0.0;
-int ENC_data[2] = { 0 };
+float ENC_data[2] = { 0 };
 int ENC_delta = 0;
 // float tau_load_ref = 0.0; 
 float tau_L = 0.0; 
@@ -144,7 +143,6 @@ float wt = 0.0;
 float dwt = 0.0;
 //周波数指令値を徐々に上げる時に使用
 float T_trans;
-int Flag_FreqRamp = 0;
 float delta_omega;
 int Counter_up = 0;
 int Counter_down = 0;
@@ -507,11 +505,11 @@ interrupt void IntrFunc1(void){
 
 	// ***** スイッチング周波数計算 *****// 
 	// スイッチング状態からuvw相信号を取得
-	// SW_Inst.U_Edge[0] = SwitchingState[out_swp][0];
-	// SW_Inst.V_Edge[0] = SwitchingState[out_swp][1];
-	// SW_Inst.W_Edge[0] = SwitchingState[out_swp][2];
-	// SF_calculation(&SW_Inst, TS);
-	// SF_average = SW_Inst.SF_average;
+	SW_Inst.U_Edge[0] = SwitchingState[out_swp][0];
+	SW_Inst.V_Edge[0] = SwitchingState[out_swp][1];
+	SW_Inst.W_Edge[0] = SwitchingState[out_swp][2];
+	SF_calculation(&SW_Inst, TS);
+	SF_average = SW_Inst.SF_average;
 
 	// DACの出力設定
 	data_dac[0] = tau_L/1.0;

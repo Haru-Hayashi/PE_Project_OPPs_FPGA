@@ -15,5 +15,6 @@ float tw;
 
 void SVM_Calculation(SVM_Calc *svm, float V_a, float V_b, float Vdc, float Ts);
 void SVM_Calculation_Init(SVM_Calc *svm);
+void VValt(int *VV_alt, int sector);
 
 #endif
