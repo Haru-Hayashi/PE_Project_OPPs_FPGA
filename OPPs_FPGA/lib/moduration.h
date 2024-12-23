@@ -22,7 +22,10 @@ typedef struct{
     float alpha_u[Angle_Num+1];
     float alpha_v[Angle_Num+1];
     float alpha_w[Angle_Num+1];
-    float VV_Num[Angle_Num+1];
+    int count_u;
+    int count_v;
+    int count_w;
+    int VV_Num[Angle_Num+1];
     float VV_time[Angle_Num+1];
 } Pulse_Pattern;
 

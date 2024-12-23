@@ -386,12 +386,12 @@ interrupt void IntrFunc1(void){
 
 	// 確認用
 	for (i = 0; i <= Angle_Num; i++) {
-		// Conf1[i] = Pulse.alpha_u[i];
-		// Conf2[i] = Pulse.alpha_v[i];
-		// Conf3[i] = Pulse.alpha_w[i];
 		Conf1[i] = Pulse.t_u[i]*1e6;
 		Conf2[i] = Pulse.t_v[i]*1e6;
 		Conf3[i] = Pulse.t_w[i]*1e6;
+		// Conf1[i] = Pulse.VV_Num[i];
+		// Conf2[i] = Pulse.VV_time[i];
+		// Conf3[0] = Pulse.count_w;
 	}
 
 	// TS_conv[0] = TS*1e6;
