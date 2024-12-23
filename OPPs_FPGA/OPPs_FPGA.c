@@ -40,6 +40,7 @@ const float p = 2, Ls = 90.5e-3, Lr = 90.5e-3, Rs = 0.411, Rr = 0.382, M = 86.7e
 IM_tMotor m;
 LPF_tLowPassFilter lpf;
 far Switching_Instance SW_Inst;
+Pulse_Pattern Pulse;
 
 volatile float offset[INPUT_DATA_ORDER_NUM] = {0};
 
@@ -178,6 +179,7 @@ float wInput_VV2_time_veiw = 0;
 float wInput_VV1_time_veiw = 0;
 
 //OPPsの実装に使用
+bool Init_write = 0;
 int pulse_sector[2] = 0;
 int phase_sector = 0;
 float trans_time = 0.0;
@@ -189,6 +191,11 @@ float lap_time[2];
 int Flag_Init = 1;
 int phase_sector_trans = 0;
 int Flag_OPP = 0;
+// 描画用
+float VV_time[9];
+float Conf1[9];
+float Conf2[9];
+float Conf3[9];
 
 //線間電圧、相電圧、電圧積分値計算
 float Vu_inv = 0.0, Vv_inv = 0.0, Vw_inv = 0.0;
@@ -361,126 +368,161 @@ interrupt void IntrFunc1(void){
 
 	// ******************* 制御記述 ******************* //
 
-	TS_conv[0] = TS*1e6;
-	TS_conv[1] = TS*1e6+1000;
+	if(!Init_write){
+		// // 最初だけ書き込み
+		Init_write = 1;
 
-	int *VV_alt = (int *)malloc(3 * sizeof(int));  
-
-	// float t_alpha[9] = {200.4688, 356.9949, 461.2387, 597.8782, 791.9321, 937.5526, 1261.8310, 1426.6966, 1679.4439};
-	// float t_beta[9] = {252.7472, 417.6128, 741.8912, 887.5117, 1081.5656, 1218.2051, 1322.4489, 1478.9750, 1679.4439};
-	float t_alpha[9] = {200.4688435, 156.526073, 104.2437986, 136.6395637, 194.0538405, 145.6205679, 324.2784012, 164.8655769, 252.7471906};
-	float t_beta[9] = {252.7471906, 164.8655769, 324.2784012, 145.6205679, 194.0538405, 136.6395637, 104.2437986, 156.526073, 200.4688435};
-
-	if(Flag_Init == 1){
-		trans_time = floor(t_alpha[0] / TS_conv[0]);
-		trans_time_first = trans_time;	
-		phase_sector = 1;
-		pulse_sector[0] = 1;
-		Flag_Init = 0;
-		VValt(VV_alt, phase_sector);
-	}  
-
-	// if(trans_time<0){tarns_time=0;}                                                                                                                                                                                  
-
-	if(trans_count >= trans_time){
-
-		trans_count = 0;
-
-		pulse_sector[1] = pulse_sector[0];
-		pulse_sector[0]++;
-		if(pulse_sector[0] > 9){
-			pulse_sector[0] = 1;
-			phase_sector++;
-			phase_sector_trans = 1;
-			if(phase_sector > 12){
-				phase_sector = 1;
-			}
+		// u相のスイッチング角を定義(0～pi/2[rad])
+		float alpha[Angle_Num] = {0.2098, 0.3335, 0.4713, 0.5687, 0.7221, 0.7905, 1.1176, 1.1805};
+		for (i = 0; i < Angle_Num; i++) {
+			Pulse.alpha[i] = alpha[i];
 		}
-		
-		if(pulse_sector[0] % 2 != 0){
-			alt_num[1] = alt_num[0];
-			alt_num[0] = 0;
-		}else{
-			alt_num[1] = alt_num[0];
-			alt_num[0] = 1;
-		}
+		// 各相スイッチング角からスイッチング時間を計算
+		SwDuration(&Pulse, TS);
+		// 各相スイッチング時間からベクトル番号とその持続時間を計算
+		VV_Pattern(&Pulse);
 
-		if(phase_sector % 2 != 0){
-			if(phase_sector_trans == 1){
-				lap_time[0] = TS_conv[0]*(trans_time+1) - (t_beta[8]-lap_time[1]);
-				wInput_VV1 = VV_alt[0];
-				VValt(VV_alt, phase_sector);
-				wInput_VV2 = VV_alt[0];
-				phase_sector_trans = 0;
-			}else{
-				lap_time[0] = TS_conv[0]*(trans_time+1) - (t_alpha[pulse_sector[1]-1]-lap_time[1]);
-				wInput_VV1 = VV_alt[alt_num[1]];
-				wInput_VV2 = VV_alt[alt_num[0]];
-			}
-			lap_time[1] = TS_conv[0]-lap_time[0];
-			if(pulse_sector[0] == 4 || pulse_sector[0] == 8){
-				alt_num[1] = 0;
-				alt_num[0] = 2;
-				wInput_VV1 = VV_alt[alt_num[1]];
-				wInput_VV2 = VV_alt[alt_num[0]];
-			}
-			trans_time = floor((t_alpha[pulse_sector[0]-1]-lap_time[1]) / TS_conv[0]);
-		}else{
-			if(phase_sector_trans == 1){
-				lap_time[0] = TS_conv[0]*(trans_time+1) - (t_alpha[8]-lap_time[1]);
-				wInput_VV1 = VV_alt[0];
-				VValt(VV_alt, phase_sector);
-				wInput_VV2 = VV_alt[0];
-				phase_sector_trans = 0;
-			}else{
-				lap_time[0] = TS_conv[0]*(trans_time+1) - (t_beta[pulse_sector[1]-1]-lap_time[1]);
-				wInput_VV1 = VV_alt[alt_num[1]];
-				wInput_VV2 = VV_alt[alt_num[0]];
-			}
-			lap_time[1] = TS_conv[0]-lap_time[0];
-			if(pulse_sector[0] == 2 || pulse_sector[0] == 6){
-				alt_num[1] = 0;
-				alt_num[0] = 2;
-				wInput_VV1 = VV_alt[alt_num[1]];
-				wInput_VV2 = VV_alt[alt_num[0]];
-			}
-			trans_time = floor((t_beta[pulse_sector[0]-1]-lap_time[1]) / TS_conv[0]);
-		}
-
-		wInput_VV3 = wInput_VV2;
-		wInput_VV4 = wInput_VV2;
-		wInput_VV5 = wInput_VV2;
-		wInput_VV6 = wInput_VV2;
-		wInput_VV7 = wInput_VV2;
-		wInput_VV1_time = lap_time[0];
-		wInput_VV2_time = lap_time[1];
-		wInput_VV3_time = TS_conv[1];
-		wInput_VV4_time = TS_conv[1];
-		wInput_VV5_time = TS_conv[1];
-		wInput_VV6_time = TS_conv[1];
-
-	}else{
-
-		//ベクトルを持続する
-		wInput_VV1 = VV_alt[alt_num[0]];
-		wInput_VV2 = wInput_VV1;
-		wInput_VV3 = wInput_VV1;
-		wInput_VV4 = wInput_VV1;
-		wInput_VV5 = wInput_VV1;
-		wInput_VV6 = wInput_VV1;
-		wInput_VV7 = wInput_VV1;
-		wInput_VV1_time = TS_conv[0];
-		wInput_VV2_time = TS_conv[1];
-		wInput_VV3_time = TS_conv[1];
-		wInput_VV4_time = TS_conv[1];
-		wInput_VV5_time = TS_conv[1];
-		wInput_VV6_time = TS_conv[1];
 	}
-	out_swp = wInput_VV1;
 
-	trans_count++;
+	// 確認用
+	for (i = 0; i <= Angle_Num; i++) {
+		// Conf1[i] = Pulse.alpha_u[i];
+		// Conf2[i] = Pulse.alpha_v[i];
+		// Conf3[i] = Pulse.alpha_w[i];
+		Conf1[i] = Pulse.t_u[i]*1e6;
+		Conf2[i] = Pulse.t_v[i]*1e6;
+		Conf3[i] = Pulse.t_w[i]*1e6;
+	}
 
-	free(VV_alt);
+	// TS_conv[0] = TS*1e6;
+	// TS_conv[1] = TS*1e6+1000;
+
+	// int *VV_alt = (int *)malloc(3 * sizeof(int));  
+
+	// // float t_alpha[9] = {200.4688435, 156.526073, 104.2437986, 136.6395637, 194.0538405, 145.6205679, 324.2784012, 164.8655769, 252.7471906};
+	// // float t_beta[9] = {252.7471906, 164.8655769, 324.2784012, 145.6205679, 194.0538405, 136.6395637, 104.2437986, 156.526073, 200.4688435};
+
+	// float t_alpha[9];
+	// float t_beta[9]; 
+
+	// for (i = 0; i <= Angle_Num; i++) {
+	// 	t_alpha[i] = Pulse.VV_time[i];
+	// }
+	// for (i = Angle_Num; i >=0; i--) {
+	// 	t_beta[i] = Pulse.VV_time[i];
+	// }
+
+	// if(!Init_write){
+	// 	// 最初だけ書き込み
+	// 	Init_write = 1;
+
+	// 	trans_time = floor(t_alpha[0] / TS_conv[0]);
+	// 	trans_time_first = trans_time;	
+	// 	phase_sector = 1;
+	// 	pulse_sector[0] = 1;
+	// 	Flag_Init = 0;
+	// 	VValt(VV_alt, phase_sector);
+	// }                                                                                                                                                                                  
+
+	// if(trans_count >= trans_time){
+
+	// 	trans_count = 0;
+
+	// 	pulse_sector[1] = pulse_sector[0];
+	// 	pulse_sector[0]++;
+	// 	if(pulse_sector[0] > 9){
+	// 		pulse_sector[0] = 1;
+	// 		phase_sector++;
+	// 		phase_sector_trans = 1;
+	// 		if(phase_sector > 12){
+	// 			phase_sector = 1;
+	// 		}
+	// 	}
+		
+	// 	if(pulse_sector[0] % 2 != 0){
+	// 		alt_num[1] = alt_num[0];
+	// 		alt_num[0] = 0;
+	// 	}else{
+	// 		alt_num[1] = alt_num[0];
+	// 		alt_num[0] = 1;
+	// 	}
+
+	// 	if(phase_sector % 2 != 0){
+	// 		if(phase_sector_trans == 1){
+	// 			lap_time[0] = TS_conv[0]*(trans_time+1) - (t_beta[8]-lap_time[1]);
+	// 			wInput_VV1 = VV_alt[0];
+	// 			VValt(VV_alt, phase_sector);
+	// 			wInput_VV2 = VV_alt[0];
+	// 			phase_sector_trans = 0;
+	// 		}else{
+	// 			lap_time[0] = TS_conv[0]*(trans_time+1) - (t_alpha[pulse_sector[1]-1]-lap_time[1]);
+	// 			wInput_VV1 = VV_alt[alt_num[1]];
+	// 			wInput_VV2 = VV_alt[alt_num[0]];
+	// 		}
+	// 		lap_time[1] = TS_conv[0]-lap_time[0];
+	// 		if(pulse_sector[0] == 4 || pulse_sector[0] == 8){
+	// 			alt_num[1] = 0;
+	// 			alt_num[0] = 2;
+	// 			wInput_VV1 = VV_alt[alt_num[1]];
+	// 			wInput_VV2 = VV_alt[alt_num[0]];
+	// 		}
+	// 		trans_time = floor((t_alpha[pulse_sector[0]-1]-lap_time[1]) / TS_conv[0]);
+	// 	}else{
+	// 		if(phase_sector_trans == 1){
+	// 			lap_time[0] = TS_conv[0]*(trans_time+1) - (t_alpha[8]-lap_time[1]);
+	// 			wInput_VV1 = VV_alt[0];
+	// 			VValt(VV_alt, phase_sector);
+	// 			wInput_VV2 = VV_alt[0];
+	// 			phase_sector_trans = 0;
+	// 		}else{
+	// 			lap_time[0] = TS_conv[0]*(trans_time+1) - (t_beta[pulse_sector[1]-1]-lap_time[1]);
+	// 			wInput_VV1 = VV_alt[alt_num[1]];
+	// 			wInput_VV2 = VV_alt[alt_num[0]];
+	// 		}
+	// 		lap_time[1] = TS_conv[0]-lap_time[0];
+	// 		if(pulse_sector[0] == 2 || pulse_sector[0] == 6){
+	// 			alt_num[1] = 0;
+	// 			alt_num[0] = 2;
+	// 			wInput_VV1 = VV_alt[alt_num[1]];
+	// 			wInput_VV2 = VV_alt[alt_num[0]];
+	// 		}
+	// 		trans_time = floor((t_beta[pulse_sector[0]-1]-lap_time[1]) / TS_conv[0]);
+	// 	}
+
+	// 	wInput_VV3 = wInput_VV2;
+	// 	wInput_VV4 = wInput_VV2;
+	// 	wInput_VV5 = wInput_VV2;
+	// 	wInput_VV6 = wInput_VV2;
+	// 	wInput_VV7 = wInput_VV2;
+	// 	wInput_VV1_time = lap_time[0];
+	// 	wInput_VV2_time = lap_time[1];
+	// 	wInput_VV3_time = TS_conv[1];
+	// 	wInput_VV4_time = TS_conv[1];
+	// 	wInput_VV5_time = TS_conv[1];
+	// 	wInput_VV6_time = TS_conv[1];
+
+	// }else{
+
+	// 	//ベクトルを持続する
+	// 	wInput_VV1 = VV_alt[alt_num[0]];
+	// 	wInput_VV2 = wInput_VV1;
+	// 	wInput_VV3 = wInput_VV1;
+	// 	wInput_VV4 = wInput_VV1;
+	// 	wInput_VV5 = wInput_VV1;
+	// 	wInput_VV6 = wInput_VV1;
+	// 	wInput_VV7 = wInput_VV1;
+	// 	wInput_VV1_time = TS_conv[0];
+	// 	wInput_VV2_time = TS_conv[1];
+	// 	wInput_VV3_time = TS_conv[1];
+	// 	wInput_VV4_time = TS_conv[1];
+	// 	wInput_VV5_time = TS_conv[1];
+	// 	wInput_VV6_time = TS_conv[1];
+	// }
+	// out_swp = wInput_VV1;
+
+	// trans_count++;
+
+	// free(VV_alt);
 
 	if(Flag_stop == 1){
 		wInput_VV1 = 8;

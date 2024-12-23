@@ -6,6 +6,8 @@
         "moduration.h": "c",
         "stdio.h": "c",
         "integrator.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "userdefined.h": "c",
+        "mwio4.h": "c"
     }
 }

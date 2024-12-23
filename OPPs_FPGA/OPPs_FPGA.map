@@ -1,10 +1,10 @@
 ******************************************************************************
                TMS320C6x Linker PC v7.4.24                     
 ******************************************************************************
->> Linked Mon Dec 23 11:30:33 2024
+>> Linked Mon Dec 23 21:04:07 2024
 
 OUTPUT FILE NAME:   <OPPs_FPGA.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 0c01dea0
+ENTRY POINT SYMBOL: "_c_int00"  address: 0c01d8e0
 
 
 MEMORY CONFIGURATION
@@ -13,7 +13,7 @@ MEMORY CONFIGURATION
 ----------------------  --------  ---------  --------  --------  ----  --------
   IPC_ISR_REG           02620244   00000004  00000000  00000004  RWIX
   DDR3_INIT_CODE        0c000000   00018000  00000000  00018000  RW X
-  USER_SRAM_1_4         0c018000   000e8000  00009b40  000de4c0  RWIX
+  USER_SRAM_1_4         0c018000   000e8000  00008ed4  000df12c  RWIX
   KNL0_SRAM_1_4         10800000   000fff80  00000000  000fff80  RWIX
   KNL0_BOOT_AREA        108fff80   0000007c  00000000  0000007c  RWIX
   KNL0_MAGIC_ADDRESS    108ffffc   00000004  00000000  00000004  RWIX
@@ -37,20 +37,18 @@ SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-0c018000    0c018000    000064c0   000064c0    r-x
-  0c018000    0c018000    000064c0   000064c0    r-x .text
-0c01e4c0    0c01e4c0    000009bc   00000000    rw-
-  0c01e4c0    0c01e4c0    000009bc   00000000    rw- .far
-0c01ee80    0c01ee80    00000800   00000000    rw-
-  0c01ee80    0c01ee80    00000800   00000000    rw- .sysmem
-0c01f680    0c01f680    000001bc   000001bc    rw-
-  0c01f680    0c01f680    000001bc   000001bc    rw- .fardata
-0c01f880    0c01f880    000000e0   000000e0    r--
-  0c01f880    0c01f880    000000e0   000000e0    r-- .const
-0c01f980    0c01f980    00000010   00000010    r--
-  0c01f980    0c01f980    00000010   00000010    r-- .switch
-0c01fa00    0c01fa00    00002218   00002218    r--
-  0c01fa00    0c01fa00    00002218   00002218    r-- .cinit
+0c018000    0c018000    00005ee0   00005ee0    r-x
+  0c018000    0c018000    00005ee0   00005ee0    r-x .text
+0c01dee0    0c01dee0    00000b9c   00000000    rw-
+  0c01dee0    0c01dee0    00000b9c   00000000    rw- .far
+0c01ea80    0c01ea80    00000198   00000198    rw-
+  0c01ea80    0c01ea80    00000198   00000198    rw- .fardata
+0c01ec80    0c01ec80    000000b0   000000b0    r--
+  0c01ec80    0c01ec80    000000b0   000000b0    r-- .const
+0c01ed80    0c01ed80    00000010   00000010    r--
+  0c01ed80    0c01ed80    00000010   00000010    r-- .switch
+0c01ee00    0c01ee00    00002200   00002200    r--
+  0c01ee00    0c01ee00    00002200   00002200    r-- .cinit
 11e00000    11e00000    000033e0   000033e0    r-x
   11e00000    11e00000    000033e0   000033e0    r-x .text_2
 11f00000    11f00000    000032b8   000022b8    rw-
@@ -66,143 +64,126 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.text      0    0c018000    000064c0     
-                  0c018000    00000fe0     OPPs_FPGA.obj (.text:retain)
-                  0c018fe0    000008a0     moduration.obj (.text)
-                  0c019880    000006c0     mwio4.lib : mw_i2c_eeprom.obj (.text)
-                  0c019f40    000005c0     rts6600_elf.lib : divd.obj (.text:__c6xabi_divd)
-                  0c01a500    000005c0     mwio4.lib : DAC_LIB.obj (.text)
-                  0c01aac0    00000540     InductionMotor.obj (.text)
-                  0c01b000    000003c0     mwio4.lib : mw_spi.obj (.text)
-                  0c01b3c0    000003a0     Inverter.obj (.text)
-                  0c01b760    00000360     mwio4.lib : mw_flash.obj (.text)
-                  0c01bac0    00000340               : mw_platform.obj (.text)
-                  0c01be00    000002c0     OPPs_FPGA.obj (.text)
-                  0c01c0c0    00000280     rts6600_elf.lib : divf.obj (.text:__c6xabi_divf)
-                  0c01c340    00000280                     : memory.obj (.text:free)
-                  0c01c5c0    00000200     mwio4.lib : FPGA_LIB.obj (.text)
-                  0c01c7c0    000001c0     DSPBoard.obj (.text)
-                  0c01c980    000001c0     rts6600_elf.lib : atan.obj (.text:atan)
-                  0c01cb40    00000180                     : copy_decompress_rle.obj (.text:__TI_decompress_rle_core)
-                  0c01ccc0    00000180                     : atan2.obj (.text:atan2)
-                  0c01ce40    00000180                     : frexp.obj (.text:frexp)
-                  0c01cfc0    00000180                     : memory.obj (.text:malloc)
-                  0c01d140    00000160                     : sqrt.obj (.text:sqrt)
-                  0c01d2a0    00000100                     : autoinit.obj (.text:_auto_init_elf)
-                  0c01d3a0    00000100                     : cpy_tbl.obj (.text:copy_in)
-                  0c01d4a0    00000100     mwio4.lib : utility.obj (.text)
-                  0c01d5a0    000000e0     LowPassFilter.obj (.text)
-                  0c01d680    000000e0     rts6600_elf.lib : divi.obj (.text:__divi)
-                  0c01d760    000000e0                     : memset.obj (.text:memset)
-                  0c01d840    000000c0                     : divu.obj (.text:__divu)
-                  0c01d900    000000c0                     : exit.obj (.text:exit)
-                  0c01d9c0    000000c0                     : tls.obj (.text:tls:init:__TI_tls_init)
-                  0c01da80    000000a0                     : memory.obj (.text:_minit)
-                  0c01db20    000000a0                     : memcpy64.obj (.text:memcpy)
-                  0c01dbc0    000000a0                     : memory.obj (.text:minsert)
-                  0c01dc60    000000a0                     : modf.obj (.text:modf)
-                  0c01dd00    000000a0                     : memory.obj (.text:mremove)
-                  0c01dda0    00000080                     : fixdu.obj (.text:__c6xabi_fixdu)
-                  0c01de20    00000080                     : fixfu.obj (.text:__c6xabi_fixfu)
-                  0c01dea0    00000080                     : boot.obj (.text:_c_int00)
-                  0c01df20    00000080     mwio4.lib : PEV_LIB.obj (.text)
-                  0c01dfa0    00000080               : mw_i2c.obj (.text)
-                  0c01e020    00000060     rts6600_elf.lib : cpp_init.obj (.text:__TI_cpp_init)
-                  0c01e080    00000060                     : frcmpyd_div.obj (.text:__c6xabi_frcmpyd_div)
-                  0c01e0e0    00000060                     : llshift.obj (.text:__c6xabi_llshru)
-                  0c01e140    00000040     Vector.obj (.text)
-                  0c01e180    00000040     rts6600_elf.lib : args_main.obj (.text:_args_main)
-                  0c01e1c0    00000020     ti.csl.ae66 : csl_gpioGetBaseAddress.oe66 (.text:CSL_GPIO_open)
-                  0c01e1e0    00000020     Main.obj (.text)
-                  0c01e200    00000020     rts6600_elf.lib : errno.obj (.text:__c6xabi_errno_addr)
-                  0c01e220    00000020                     : _lock.obj (.text:_nop)
-                  0c01e240    00000020                     : exit.obj (.text:abort)
-                  0c01e260    00000020                     : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
-                  0c01e280    00000020                     : copy_decompress_rle.obj (.text:decompress:rle24:__TI_decompress_rle24)
-                  0c01e2a0    00000010     mwio4.lib : EMIF16.obj ($Tramp$S$$EMF_EnableIntr_s32)
-                  0c01e2b0    00000010               : gpio_int.obj ($Tramp$S$$GPI_init_vo)
-                  0c01e2c0    00000010               : mwintc.obj ($Tramp$S$$mwintc_setupApp)
-                  0c01e2d0    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_set_offset)
-                  0c01e2e0    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_abz_read)
-                  0c01e2f0    00000010               : EMIF16.obj ($Tramp$S$$EMF_ReadFpgaBoard_s32)
-                  0c01e300    00000010               : gpio_int.obj ($Tramp$S$$GPI_enable_int_vo)
-                  0c01e310    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer1_init)
-                  0c01e320    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_init)
-                  0c01e330    00000010               : gpio_int.obj ($Tramp$S$$GPI_setVector_vo)
-                  0c01e340    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_abz_init_maxcount)
-                  0c01e350    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_abz_set_mode)
-                  0c01e360    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_enable_int)
-                  0c01e370    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_set_mode)
-                  0c01e380    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_set_range)
-                  0c01e390    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_int_init)
-                  0c01e3a0    00000010               : gpio_int.obj ($Tramp$S$$GPI_disable_int_vo)
-                  0c01e3b0    00000010               : mwintc.obj ($Tramp$S$$IRQ_globalRestore)
-                  0c01e3c0    00000010               : EMIF16.obj ($Tramp$S$$EMF_Read_s32)
-                  0c01e3d0    00000010               : EMIF16.obj ($Tramp$S$$EMF_Write_s32)
-                  0c01e3e0    00000010               : EMIF16.obj ($Tramp$S$$EMF_Write2_s32)
-                  0c01e3f0    00000010               : mwintc.obj ($Tramp$S$$int_end_nestint)
-                  0c01e400    00000010               : mwintc.obj ($Tramp$S$$IRQ_globalDisable)
-                  0c01e410    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_clear)
-                  0c01e420    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_stop)
-                  0c01e430    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_read)
-                  0c01e440    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_in_grp)
-                  0c01e450    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_in_st)
-                  0c01e460    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_start)
-                  0c01e470    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_start)
-                  0c01e480    00000010               : mwintc.obj ($Tramp$S$$IRQ_globalEnable)
-                  0c01e490    00000010               : mwintc.obj ($Tramp$S$$int_begin_nestint)
-                  0c01e4a0    00000010               : gpio_int.obj ($Tramp$S$$GPI_int_ack_vo)
-                  0c01e4b0    00000010     --HOLE-- [fill = 00000000]
+.text      0    0c018000    00005ee0     
+                  0c018000    00000e80     moduration.obj (.text)
+                  0c018e80    00000ac0     OPPs_FPGA.obj (.text:retain)
+                  0c019940    000006c0     mwio4.lib : mw_i2c_eeprom.obj (.text)
+                  0c01a000    000005c0     rts6600_elf.lib : divd.obj (.text:__c6xabi_divd)
+                  0c01a5c0    000005c0     mwio4.lib : DAC_LIB.obj (.text)
+                  0c01ab80    00000540     InductionMotor.obj (.text)
+                  0c01b0c0    000003c0     mwio4.lib : mw_spi.obj (.text)
+                  0c01b480    000003a0     Inverter.obj (.text)
+                  0c01b820    00000360     mwio4.lib : mw_flash.obj (.text)
+                  0c01bb80    00000340               : mw_platform.obj (.text)
+                  0c01bec0    000002c0     OPPs_FPGA.obj (.text)
+                  0c01c180    00000280     rts6600_elf.lib : divf.obj (.text:__c6xabi_divf)
+                  0c01c400    00000200     mwio4.lib : FPGA_LIB.obj (.text)
+                  0c01c600    000001c0     DSPBoard.obj (.text)
+                  0c01c7c0    000001c0     rts6600_elf.lib : atan.obj (.text:atan)
+                  0c01c980    00000180                     : copy_decompress_rle.obj (.text:__TI_decompress_rle_core)
+                  0c01cb00    00000180                     : atan2.obj (.text:atan2)
+                  0c01cc80    00000180                     : frexp.obj (.text:frexp)
+                  0c01ce00    00000160                     : sqrt.obj (.text:sqrt)
+                  0c01cf60    00000100                     : autoinit.obj (.text:_auto_init_elf)
+                  0c01d060    00000100                     : cpy_tbl.obj (.text:copy_in)
+                  0c01d160    00000100     mwio4.lib : utility.obj (.text)
+                  0c01d260    000000e0     LowPassFilter.obj (.text)
+                  0c01d340    000000e0     rts6600_elf.lib : divi.obj (.text:__divi)
+                  0c01d420    000000e0                     : memset.obj (.text:memset)
+                  0c01d500    000000c0                     : divu.obj (.text:__divu)
+                  0c01d5c0    000000c0                     : exit.obj (.text:exit)
+                  0c01d680    000000c0                     : tls.obj (.text:tls:init:__TI_tls_init)
+                  0c01d740    000000a0                     : memcpy64.obj (.text:memcpy)
+                  0c01d7e0    00000080                     : fixdu.obj (.text:__c6xabi_fixdu)
+                  0c01d860    00000080                     : fixfu.obj (.text:__c6xabi_fixfu)
+                  0c01d8e0    00000080                     : boot.obj (.text:_c_int00)
+                  0c01d960    00000080     mwio4.lib : PEV_LIB.obj (.text)
+                  0c01d9e0    00000080               : mw_i2c.obj (.text)
+                  0c01da60    00000060     rts6600_elf.lib : cpp_init.obj (.text:__TI_cpp_init)
+                  0c01dac0    00000060                     : frcmpyd_div.obj (.text:__c6xabi_frcmpyd_div)
+                  0c01db20    00000060                     : llshift.obj (.text:__c6xabi_llshru)
+                  0c01db80    00000040     Vector.obj (.text)
+                  0c01dbc0    00000040     rts6600_elf.lib : args_main.obj (.text:_args_main)
+                  0c01dc00    00000020     ti.csl.ae66 : csl_gpioGetBaseAddress.oe66 (.text:CSL_GPIO_open)
+                  0c01dc20    00000020     Main.obj (.text)
+                  0c01dc40    00000020     rts6600_elf.lib : errno.obj (.text:__c6xabi_errno_addr)
+                  0c01dc60    00000020                     : exit.obj (.text:abort)
+                  0c01dc80    00000020                     : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
+                  0c01dca0    00000020                     : copy_decompress_rle.obj (.text:decompress:rle24:__TI_decompress_rle24)
+                  0c01dcc0    00000010     mwio4.lib : EMIF16.obj ($Tramp$S$$EMF_EnableIntr_s32)
+                  0c01dcd0    00000010               : gpio_int.obj ($Tramp$S$$GPI_init_vo)
+                  0c01dce0    00000010               : mwintc.obj ($Tramp$S$$mwintc_setupApp)
+                  0c01dcf0    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_set_offset)
+                  0c01dd00    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_abz_read)
+                  0c01dd10    00000010               : EMIF16.obj ($Tramp$S$$EMF_ReadFpgaBoard_s32)
+                  0c01dd20    00000010               : gpio_int.obj ($Tramp$S$$GPI_enable_int_vo)
+                  0c01dd30    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer1_init)
+                  0c01dd40    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_init)
+                  0c01dd50    00000010               : gpio_int.obj ($Tramp$S$$GPI_setVector_vo)
+                  0c01dd60    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_abz_init_maxcount)
+                  0c01dd70    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_abz_set_mode)
+                  0c01dd80    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_enable_int)
+                  0c01dd90    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_set_mode)
+                  0c01dda0    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_set_range)
+                  0c01ddb0    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_int_init)
+                  0c01ddc0    00000010               : gpio_int.obj ($Tramp$S$$GPI_disable_int_vo)
+                  0c01ddd0    00000010               : mwintc.obj ($Tramp$S$$IRQ_globalRestore)
+                  0c01dde0    00000010               : EMIF16.obj ($Tramp$S$$EMF_Read_s32)
+                  0c01ddf0    00000010               : EMIF16.obj ($Tramp$S$$EMF_Write_s32)
+                  0c01de00    00000010               : EMIF16.obj ($Tramp$S$$EMF_Write2_s32)
+                  0c01de10    00000010               : mwintc.obj ($Tramp$S$$int_end_nestint)
+                  0c01de20    00000010               : mwintc.obj ($Tramp$S$$IRQ_globalDisable)
+                  0c01de30    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_clear)
+                  0c01de40    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_stop)
+                  0c01de50    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_read)
+                  0c01de60    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_in_grp)
+                  0c01de70    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_in_st)
+                  0c01de80    00000010               : PEV_INV_LIB.obj ($Tramp$S$$PEV_ad_start)
+                  0c01de90    00000010               : timer_lib.obj ($Tramp$S$$C6657_timer0_start)
+                  0c01dea0    00000010               : mwintc.obj ($Tramp$S$$IRQ_globalEnable)
+                  0c01deb0    00000010               : mwintc.obj ($Tramp$S$$int_begin_nestint)
+                  0c01dec0    00000010               : gpio_int.obj ($Tramp$S$$GPI_int_ack_vo)
+                  0c01ded0    00000010     --HOLE-- [fill = 00000000]
 
-.far       0    0c01e4c0    000009bc     UNINITIALIZED
-                  0c01e4c0    000007d0     OPPs_FPGA.obj (.far)
-                  0c01ec90    000001e0     mwio4.lib : DAC_LIB.obj (.far)
-                  0c01ee70    0000000c               : EMIF16.obj (.far)
+.far       0    0c01dee0    00000b9c     UNINITIALIZED
+                  0c01dee0    000009b0     OPPs_FPGA.obj (.far)
+                  0c01e890    000001e0     mwio4.lib : DAC_LIB.obj (.far)
+                  0c01ea70    0000000c               : EMIF16.obj (.far)
 
-.sysmem    0    0c01ee80    00000800     UNINITIALIZED
-                  0c01ee80    00000008     rts6600_elf.lib : memory.obj (.sysmem)
-                  0c01ee88    000007f8     --HOLE--
+.fardata   0    0c01ea80    00000198     
+                  0c01ea80    000000a8     mwio4.lib : mw_platform.obj (.fardata)
+                  0c01eb28    00000040     rts6600_elf.lib : atan.obj (.fardata:arctan_consts$1)
+                  0c01eb68    00000020                     : atan.obj (.fardata:A$2)
+                  0c01eb88    00000020     OPPs_FPGA.obj (.fardata:data)
+                  0c01eba8    00000018     Inverter.obj (.fardata:ModulationSwitchingState)
+                  0c01ebc0    00000018     Inverter.obj (.fardata:SwitchingState)
+                  0c01ebd8    00000018     OPPs_FPGA.obj (.fardata:SwitchingState)
+                  0c01ebf0    0000000c     rts6600_elf.lib : exit.obj (.fardata)
+                  0c01ebfc    00000004                     : errno.obj (.fardata)
+                  0c01ec00    00000008     OPPs_FPGA.obj (.fardata:ENC_data)
+                  0c01ec08    00000008     Inverter.obj (.fardata:SwitchingCountTable)
+                  0c01ec10    00000008     Inverter.obj (.fardata:VoltageVectorPattern)
 
-.fardata   0    0c01f680    000001bc     
-                  0c01f680    000000a8     mwio4.lib : mw_platform.obj (.fardata)
-                  0c01f728    00000040     rts6600_elf.lib : atan.obj (.fardata:arctan_consts$1)
-                  0c01f768    00000020                     : atan.obj (.fardata:A$2)
-                  0c01f788    00000020     OPPs_FPGA.obj (.fardata:data)
-                  0c01f7a8    00000018     Inverter.obj (.fardata:ModulationSwitchingState)
-                  0c01f7c0    00000018     Inverter.obj (.fardata:SwitchingState)
-                  0c01f7d8    00000018     OPPs_FPGA.obj (.fardata:SwitchingState)
-                  0c01f7f0    0000000c     rts6600_elf.lib : exit.obj (.fardata)
-                  0c01f7fc    0000000c                     : memory.obj (.fardata)
-                  0c01f808    00000008     OPPs_FPGA.obj (.fardata:ENC_data)
-                  0c01f810    00000008     Inverter.obj (.fardata:SwitchingCountTable)
-                  0c01f818    00000008     Inverter.obj (.fardata:VoltageVectorPattern)
-                  0c01f820    00000008     OPPs_FPGA.obj (.fardata:alt_num)
-                  0c01f828    00000008     OPPs_FPGA.obj (.fardata:pulse_sector)
-                  0c01f830    00000008     rts6600_elf.lib : _lock.obj (.fardata)
-                  0c01f838    00000004                     : errno.obj (.fardata)
+.const     0    0c01ec80    000000b0     
+                  0c01ec80    00000030     OPPs_FPGA.obj (.const:$P$T1$2)
+                  0c01ecb0    00000020     OPPs_FPGA.obj (.const:$P$T0$1)
+                  0c01ecd0    00000020     moduration.obj (.const:$P$T0$1)
+                  0c01ecf0    00000020     moduration.obj (.const:$P$T1$2)
+                  0c01ed10    00000020     OPPs_FPGA.obj (.const:$P$T2$3)
 
-.const     0    0c01f880    000000e0     
-                  0c01f880    00000030     OPPs_FPGA.obj (.const:$P$T1$2)
-                  0c01f8b0    00000024     OPPs_FPGA.obj (.const:$P$T2$3)
-                  0c01f8d4    00000004     --HOLE-- [fill = 0]
-                  0c01f8d8    00000024     OPPs_FPGA.obj (.const:$P$T3$4)
-                  0c01f8fc    00000004     --HOLE-- [fill = 0]
-                  0c01f900    00000020     OPPs_FPGA.obj (.const:$P$T0$1)
-                  0c01f920    00000020     moduration.obj (.const:$P$T0$1)
-                  0c01f940    00000020     moduration.obj (.const:$P$T1$2)
+.switch    0    0c01ed80    00000010     
+                  0c01ed80    00000010     mwio4.lib : mw_flash.obj (.switch:mw_nor_erase)
 
-.switch    0    0c01f980    00000010     
-                  0c01f980    00000010     mwio4.lib : mw_flash.obj (.switch:mw_nor_erase)
-
-.cinit     0    0c01fa00    00002218     
-                  0c01fa00    00002069     (.cinit..data_2.load) [load image, compression = rle]
-                  0c021a69    00000003     --HOLE-- [fill = 0]
-                  0c021a6c    0000013a     (.cinit..fardata.load) [load image, compression = rle]
-                  0c021ba6    00000002     --HOLE-- [fill = 0]
-                  0c021ba8    0000004e     (.cinit..neardata.load) [load image, compression = rle]
-                  0c021bf6    00000002     --HOLE-- [fill = 0]
-                  0c021bf8    00000008     (__TI_handler_table)
-                  0c021c00    00000018     (__TI_cinit_table)
+.cinit     0    0c01ee00    00002200     
+                  0c01ee00    00002069     (.cinit..data_2.load) [load image, compression = rle]
+                  0c020e69    00000003     --HOLE-- [fill = 0]
+                  0c020e6c    0000011e     (.cinit..fardata.load) [load image, compression = rle]
+                  0c020f8a    00000002     --HOLE-- [fill = 0]
+                  0c020f8c    0000004e     (.cinit..neardata.load) [load image, compression = rle]
+                  0c020fda    00000002     --HOLE-- [fill = 0]
+                  0c020fdc    00000008     (__TI_handler_table)
+                  0c020fe4    00000004     --HOLE-- [fill = 0]
+                  0c020fe8    00000018     (__TI_cinit_table)
 
 .text_2    0    11e00000    000033e0     
                   11e00000    00001960     mwio4.lib : PEV_INV_LIB.obj (.text)
@@ -250,15 +231,15 @@ section   page    origin      length       input sections
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0c021c00 records: 3, size/record: 8, table size: 24
-	.data_2: load addr=0c01fa00, load size=00002069 bytes, run addr=11f00000, run size=000022b8 bytes, compression=rle
-	.fardata: load addr=0c021a6c, load size=0000013a bytes, run addr=0c01f680, run size=000001bc bytes, compression=rle
-	.neardata: load addr=0c021ba8, load size=0000004e bytes, run addr=11f032b8, run size=00000240 bytes, compression=rle
+__TI_cinit_table @ 0c020fe8 records: 3, size/record: 8, table size: 24
+	.data_2: load addr=0c01ee00, load size=00002069 bytes, run addr=11f00000, run size=000022b8 bytes, compression=rle
+	.fardata: load addr=0c020e6c, load size=0000011e bytes, run addr=0c01ea80, run size=00000198 bytes, compression=rle
+	.neardata: load addr=0c020f8c, load size=0000004e bytes, run addr=11f032b8, run size=00000240 bytes, compression=rle
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 0c021bf8 records: 2, size/record: 4, table size: 8
+__TI_handler_table @ 0c020fdc records: 2, size/record: 4, table size: 8
 	index: 0, handler: __TI_decompress_rle24
 	index: 1, handler: __TI_decompress_none
 
@@ -269,105 +250,105 @@ callee name               trampoline name
    callee addr  tramp addr   call addr  call info
 --------------  -----------  ---------  ----------------
 $.text:mwio4.lib<EMIF16.obj>$0x58c  $Tramp$S$$EMF_EnableIntr_s32
-   11e0252c     0c01e2a0     0c01e1ec   Main.obj (.text)
+   11e0252c     0c01dcc0     0c01dc2c   Main.obj (.text)
 $.text:mwio4.lib<gpio_int.obj>$0x124  $Tramp$S$$GPI_init_vo
-   11e03024     0c01e2b0     0c01e1e8   Main.obj (.text)
+   11e03024     0c01dcd0     0c01dc28   Main.obj (.text)
 $.text:mwio4.lib<mwintc.obj>$0x34  $Tramp$S$$mwintc_setupApp
-   11e025f4     0c01e2c0     0c01e1e4   Main.obj (.text)
+   11e025f4     0c01dce0     0c01dc24   Main.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0xf98  $Tramp$S$$PEV_ad_set_offset
-   11e00f98     0c01e2d0     0c01df40   mwio4.lib : PEV_LIB.obj (.text)
+   11e00f98     0c01dcf0     0c01d980   mwio4.lib : PEV_LIB.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0x17a4  $Tramp$S$$PEV_abz_read
-   11e017a4     0c01e2e0     0c01c7f8   DSPBoard.obj (.text)
+   11e017a4     0c01dd00     0c01c638   DSPBoard.obj (.text)
 $.text:mwio4.lib<EMIF16.obj>$0x28c  $Tramp$S$$EMF_ReadFpgaBoard_s32
-   11e0222c     0c01e2f0     0c01c6f4   mwio4.lib : FPGA_LIB.obj (.text)
-                             0c01c764             : FPGA_LIB.obj (.text)
+   11e0222c     0c01dd10     0c01c534   mwio4.lib : FPGA_LIB.obj (.text)
+                             0c01c5a4             : FPGA_LIB.obj (.text)
 $.text:mwio4.lib<gpio_int.obj>$0x14c  $Tramp$S$$GPI_enable_int_vo
-   11e0304c     0c01e300     0c01c08c   OPPs_FPGA.obj (.text)
-                             0c01c094   OPPs_FPGA.obj (.text)
+   11e0304c     0c01dd20     0c01c14c   OPPs_FPGA.obj (.text)
+                             0c01c154   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<timer_lib.obj>$0x370  $Tramp$S$$C6657_timer1_init
-   11e01cd0     0c01e310     0c01c084   OPPs_FPGA.obj (.text)
+   11e01cd0     0c01dd30     0c01c144   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<timer_lib.obj>$0x510  $Tramp$S$$C6657_timer0_init
-   11e01e70     0c01e320     0c01c074   OPPs_FPGA.obj (.text)
+   11e01e70     0c01dd40     0c01c134   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<gpio_int.obj>$0x0  $Tramp$S$$GPI_setVector_vo
-   11e02f00     0c01e330     0c01bf74   OPPs_FPGA.obj (.text)
-                             0c01bf8c   OPPs_FPGA.obj (.text)
+   11e02f00     0c01dd50     0c01c034   OPPs_FPGA.obj (.text)
+                             0c01c04c   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0x17e8  $Tramp$S$$PEV_abz_init_maxcount
-   11e017e8     0c01e340     0c01bf58   OPPs_FPGA.obj (.text)
+   11e017e8     0c01dd60     0c01c018   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0x1734  $Tramp$S$$PEV_abz_set_mode
-   11e01734     0c01e350     0c01bf48   OPPs_FPGA.obj (.text)
+   11e01734     0c01dd70     0c01c008   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0x1418  $Tramp$S$$PEV_ad_enable_int
-   11e01418     0c01e360     0c01bf44   OPPs_FPGA.obj (.text)
+   11e01418     0c01dd80     0c01c004   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0xfe0  $Tramp$S$$PEV_ad_set_mode
-   11e00fe0     0c01e370     0c01bf38   OPPs_FPGA.obj (.text)
+   11e00fe0     0c01dd90     0c01bff8   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0xf48  $Tramp$S$$PEV_ad_set_range
-   11e00f48     0c01e380     0c01bf28   OPPs_FPGA.obj (.text)
+   11e00f48     0c01dda0     0c01bfe8   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0xde0  $Tramp$S$$PEV_int_init
-   11e00de0     0c01e390     0c01bee8   OPPs_FPGA.obj (.text)
+   11e00de0     0c01ddb0     0c01bfa8   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<gpio_int.obj>$0x16c  $Tramp$S$$GPI_disable_int_vo
-   11e0306c     0c01e3a0     0c01be0c   OPPs_FPGA.obj (.text)
+   11e0306c     0c01ddc0     0c01becc   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<mwintc.obj>$0x3e8  $Tramp$S$$IRQ_globalRestore
-   11e029a8     0c01e3b0     0c01aa8c   mwio4.lib : DAC_LIB.obj (.text)
+   11e029a8     0c01ddd0     0c01ab4c   mwio4.lib : DAC_LIB.obj (.text)
 $.text:mwio4.lib<EMIF16.obj>$0x218  $Tramp$S$$EMF_Read_s32
-   11e021b8     0c01e3c0     0c01a738   mwio4.lib : DAC_LIB.obj (.text)
-                             0c01c790             : FPGA_LIB.obj (.text)
-                             0c01df68             : PEV_LIB.obj (.text)
+   11e021b8     0c01dde0     0c01a7f8   mwio4.lib : DAC_LIB.obj (.text)
+                             0c01c5d0             : FPGA_LIB.obj (.text)
+                             0c01d9a8             : PEV_LIB.obj (.text)
 $.text:mwio4.lib<EMIF16.obj>$0x0  $Tramp$S$$EMF_Write_s32
-   11e01fa0     0c01e3d0     0c01a6a0   mwio4.lib : DAC_LIB.obj (.text)
-                             0c01aa6c             : DAC_LIB.obj (.text)
-                             0c01aa78             : DAC_LIB.obj (.text)
+   11e01fa0     0c01ddf0     0c01a760   mwio4.lib : DAC_LIB.obj (.text)
+                             0c01ab2c             : DAC_LIB.obj (.text)
+                             0c01ab38             : DAC_LIB.obj (.text)
 $.text:mwio4.lib<EMIF16.obj>$0x180  $Tramp$S$$EMF_Write2_s32
-   11e02120     0c01e3e0     0c01a608   mwio4.lib : DAC_LIB.obj (.text)
-                             0c01c624             : FPGA_LIB.obj (.text)
-                             0c01c690             : FPGA_LIB.obj (.text)
+   11e02120     0c01de00     0c01a6c8   mwio4.lib : DAC_LIB.obj (.text)
+                             0c01c464             : FPGA_LIB.obj (.text)
+                             0c01c4d0             : FPGA_LIB.obj (.text)
 $.text:mwio4.lib<mwintc.obj>$0x358  $Tramp$S$$int_end_nestint
-   11e02918     0c01e3f0     0c018f08   OPPs_FPGA.obj (.text:retain)
+   11e02918     0c01de10     0c019868   OPPs_FPGA.obj (.text:retain)
 $.text:mwio4.lib<mwintc.obj>$0x410  $Tramp$S$$IRQ_globalDisable
-   11e029d0     0c01e400     0c018f04   OPPs_FPGA.obj (.text:retain)
-                             0c01aa4c   mwio4.lib : DAC_LIB.obj (.text)
-                             0c01be14   OPPs_FPGA.obj (.text)
+   11e029d0     0c01de20     0c019864   OPPs_FPGA.obj (.text:retain)
+                             0c01ab0c   mwio4.lib : DAC_LIB.obj (.text)
+                             0c01bed4   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<timer_lib.obj>$0x62c  $Tramp$S$$C6657_timer0_clear
-   11e01f8c     0c01e410     0c018f00   OPPs_FPGA.obj (.text:retain)
+   11e01f8c     0c01de30     0c019860   OPPs_FPGA.obj (.text:retain)
 $.text:mwio4.lib<timer_lib.obj>$0x4a8  $Tramp$S$$C6657_timer0_stop
-   11e01e08     0c01e420     0c018ef8   OPPs_FPGA.obj (.text:retain)
+   11e01e08     0c01de40     0c019858   OPPs_FPGA.obj (.text:retain)
 $.text:mwio4.lib<timer_lib.obj>$0x4e0  $Tramp$S$$C6657_timer0_read
-   11e01e40     0c01e430     0c018eb0   OPPs_FPGA.obj (.text:retain)
+   11e01e40     0c01de50     0c019810   OPPs_FPGA.obj (.text:retain)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0x106c  $Tramp$S$$PEV_ad_in_grp
-   11e0106c     0c01e440     0c018d10   OPPs_FPGA.obj (.text:retain)
-                             0c01c968   DSPBoard.obj (.text)
+   11e0106c     0c01de60     0c019658   OPPs_FPGA.obj (.text:retain)
+                             0c01c7a8   DSPBoard.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0x1040  $Tramp$S$$PEV_ad_in_st
-   11e01040     0c01e450     0c018ce0   OPPs_FPGA.obj (.text:retain)
-                             0c018cec   OPPs_FPGA.obj (.text:retain)
-                             0c018d00   OPPs_FPGA.obj (.text:retain)
-                             0c01c940   DSPBoard.obj (.text)
-                             0c01c948   DSPBoard.obj (.text)
-                             0c01c958   DSPBoard.obj (.text)
+   11e01040     0c01de70     0c019628   OPPs_FPGA.obj (.text:retain)
+                             0c019634   OPPs_FPGA.obj (.text:retain)
+                             0c019648   OPPs_FPGA.obj (.text:retain)
+                             0c01c780   DSPBoard.obj (.text)
+                             0c01c788   DSPBoard.obj (.text)
+                             0c01c798   DSPBoard.obj (.text)
 $.text:mwio4.lib<PEV_INV_LIB.obj>$0xf10  $Tramp$S$$PEV_ad_start
-   11e00f10     0c01e460     0c018cd8   OPPs_FPGA.obj (.text:retain)
-                             0c01c930   DSPBoard.obj (.text)
+   11e00f10     0c01de80     0c019624   OPPs_FPGA.obj (.text:retain)
+                             0c01c770   DSPBoard.obj (.text)
 $.text:mwio4.lib<timer_lib.obj>$0x4c0  $Tramp$S$$C6657_timer0_start
-   11e01e20     0c01e470     0c018ba0   OPPs_FPGA.obj (.text:retain)
+   11e01e20     0c01de90     0c0194ec   OPPs_FPGA.obj (.text:retain)
 $.text:mwio4.lib<mwintc.obj>$0x3f0  $Tramp$S$$IRQ_globalEnable
-   11e029b0     0c01e480     0c018b98   OPPs_FPGA.obj (.text:retain)
-                             0c01c098   OPPs_FPGA.obj (.text)
+   11e029b0     0c01dea0     0c0194e8   OPPs_FPGA.obj (.text:retain)
+                             0c01c158   OPPs_FPGA.obj (.text)
 $.text:mwio4.lib<mwintc.obj>$0x3a8  $Tramp$S$$int_begin_nestint
-   11e02968     0c01e490     0c018b8c   OPPs_FPGA.obj (.text:retain)
+   11e02968     0c01deb0     0c0194d8   OPPs_FPGA.obj (.text:retain)
 $.text:mwio4.lib<gpio_int.obj>$0xd4  $Tramp$S$$GPI_int_ack_vo
-   11e02fd4     0c01e4a0     0c0180e8   OPPs_FPGA.obj (.text:retain)
-                             0c018b84   OPPs_FPGA.obj (.text:retain)
+   11e02fd4     0c01dec0     0c018f2c   OPPs_FPGA.obj (.text:retain)
+                             0c0194d0   OPPs_FPGA.obj (.text:retain)
 $.text:CSL_GPIO_open:ti.csl.ae66<csl_gpioGetBaseAddress.oe66>$0x0  $Tramp$S$$CSL_GPIO_open
-   0c01e1c0     11e033a0     11e03028   mwio4.lib : gpio_int.obj (.text)
+   0c01dc00     11e033a0     11e03028   mwio4.lib : gpio_int.obj (.text)
 $.text:__c6xabi_fixdu:rts6600_elf.lib<fixdu.obj>$0x0  $Tramp$S$$__c6xabi_fixdu
-   0c01dda0     11e033b0     11e01a1c   mwio4.lib : timer_lib.obj (.text)
+   0c01d7e0     11e033b0     11e01a1c   mwio4.lib : timer_lib.obj (.text)
                              11e01b90             : timer_lib.obj (.text)
                              11e01d30             : timer_lib.obj (.text)
                              11e01ed0             : timer_lib.obj (.text)
 $.text:__c6xabi_divd:rts6600_elf.lib<divd.obj>$0x0  $Tramp$S$$__c6xabi_divd
-   0c019f40     11e033c0     11e01a14   mwio4.lib : timer_lib.obj (.text)
+   0c01a000     11e033c0     11e01a14   mwio4.lib : timer_lib.obj (.text)
                              11e01b88             : timer_lib.obj (.text)
                              11e01d28             : timer_lib.obj (.text)
                              11e01ec8             : timer_lib.obj (.text)
 $.text:__divi:rts6600_elf.lib<divi.obj>$0x0  $Tramp$S$$__c6xabi_divi
-   0c01d680     11e033d0     11e001f8   mwio4.lib : PEV_INV_LIB.obj (.text)
+   0c01d340     11e033d0     11e001f8   mwio4.lib : PEV_INV_LIB.obj (.text)
                              11e00448             : PEV_INV_LIB.obj (.text)
                              11e00470             : PEV_INV_LIB.obj (.text)
                              11e00658             : PEV_INV_LIB.obj (.text)
@@ -384,7 +365,7 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 address    name
 --------   ----
-0c01e240   C$$EXIT
+0c01dc60   C$$EXIT
 11e01f8c   C6657_timer0_clear
 11e01f78   C6657_timer0_clear_eventflag
 11e01f38   C6657_timer0_disable_int
@@ -424,25 +405,28 @@ address    name
 11e02a00   CSL2_intcHwControl
 11e030b4   CSL2_intcOpen2
 11e030a0   CSL2_loadResource
-0c01e1c0   CSL_GPIO_open
+0c01dc00   CSL_GPIO_open
 11e032a8   CSL_intcGlobalEnable
 11e03300   CSL_intcGlobalNmiEnable
 11e03240   CSL_intcInterruptDisable
 11e03220   CSL_intcInterruptEnable
-11f033e8   Check
-11f033d4   Counter_down
-11f033d0   Counter_up
-0c01a998   DAC_da_out
-0c01a500   DAC_da_out2
-0c01a954   DAC_da_set_offset
-0c01a8c0   DAC_da_set_offset2
-0c01a848   DAC_da_set_range
-0c01a758   DAC_da_set_range2
-0c01a734   DAC_get_fpga_ver
-0c01a6c0   DAC_init
-0c01a628   DAC_sync_init
-0c01c92c   DSP_InputADData
-0c01c7c0   DSP_InputEncoderData
+11f033e4   Check
+0c01e800   Conf1
+0c01e828   Conf2
+0c01e850   Conf3
+11f033d0   Counter_down
+11f033cc   Counter_up
+0c01aa58   DAC_da_out
+0c01a5c0   DAC_da_out2
+0c01aa14   DAC_da_set_offset
+0c01a980   DAC_da_set_offset2
+0c01a908   DAC_da_set_range
+0c01a818   DAC_da_set_range2
+0c01a7f4   DAC_get_fpga_ver
+0c01a780   DAC_init
+0c01a6e8   DAC_sync_init
+0c01c76c   DSP_InputADData
+0c01c600   DSP_InputEncoderData
 11e0252c   EMF_EnableIntr_s32
 11e02d20   EMF_ErrIntr_vo
 11f03540   EMF_ExtWaitErrCnt_u32s
@@ -456,49 +440,49 @@ address    name
 11e02120   EMF_Write2_s32
 11e02018   EMF_WriteFlashRom_s32
 11e01fa0   EMF_Write_s32
-0c01ee70   EMIF_IntrErr_sts
-0c01f808   ENC_data
+0c01ea70   EMIF_IntrErr_sts
+0c01ec00   ENC_data
 11f03328   ENC_delta
 11f03500   FPGA_Ts
-0c01c78c   FPGA_get_fpga_ver
-0c01c740   FPGA_read
-0c01c6c8   FPGA_read_f32
-0c01c64c   FPGA_write
-0c01c5c0   FPGA_write_f32
+0c01c5cc   FPGA_get_fpga_ver
+0c01c580   FPGA_read
+0c01c508   FPGA_read_f32
+0c01c48c   FPGA_write
+0c01c400   FPGA_write_f32
 11f034fc   FS
-11f033cc   Flag_FreqRamp
 11f0343c   Flag_Init
 11f03444   Flag_OPP
 11f0350c   Flag_TableRead
 11f034d4   Flag_Vdc_command
-11f033f4   Flag_ini
+11f033f0   Flag_ini
 11f03538   Flag_omega_max
-11f033f8   Flag_stop
-11f033fc   Flag_stop2
+11f033f4   Flag_stop
+11f033f8   Flag_stop2
 11e0306c   GPI_disable_int_vo
 11e0304c   GPI_enable_int_vo
 11e03024   GPI_init_vo
 11e02fd4   GPI_int_ack_vo
 11e02f00   GPI_setVector_vo
 11f03494   Hysteresis_Band
-0c01afa8   IM_CalcStatus
-0c01ace0   IM_Construct
-0c01ab34   IM_InitParam
-0c01aac0   IM_InitState
+0c01b068   IM_CalcStatus
+0c01ada0   IM_Construct
+0c01abf4   IM_InitParam
+0c01ab80   IM_InitState
 11e029d0   IRQ_globalDisable
 11e029b0   IRQ_globalEnable
 11e029a8   IRQ_globalRestore
-0c01e16c   InitVect2
-0c01e150   InitVect3
-0c018adc   IntrFunc0
-0c018000   IntrFunc1
-0c01b72c   Inv_CalcNVRFromVV
-0c01b6f8   Inv_CalcSwitchingCount
-0c01b6b8   Inv_Construct
-0c01b500   Inv_UpdateOutputVoltage
-0c01d5c8   LPF_CalcBDiff
-0c01d5a0   LPF_Construct
-0c01be00   MW_main
+0c01dbac   InitVect2
+0c01db90   InitVect3
+11f03424   Init_write
+0c01942c   IntrFunc0
+0c018e80   IntrFunc1
+0c01b7ec   Inv_CalcNVRFromVV
+0c01b7b8   Inv_CalcSwitchingCount
+0c01b778   Inv_Construct
+0c01b5c0   Inv_UpdateOutputVoltage
+0c01d288   LPF_CalcBDiff
+0c01d260   LPF_Construct
+0c01bec0   MW_main
 11f03434   Mod
 11e01914   PEV_abz_clear
 11e018e0   PEV_abz_clear_resolver_err
@@ -519,8 +503,8 @@ address    name
 11e00f98   PEV_ad_set_offset
 11e00f48   PEV_ad_set_range
 11e00f10   PEV_ad_start
-0c01df64   PEV_get_fpga_ver
-0c01df20   PEV_init
+0c01d9a4   PEV_get_fpga_ver
+0c01d960   PEV_init
 11e00de0   PEV_int_init
 11e00da8   PEV_inverter_control_break
 11e00d70   PEV_inverter_control_gate
@@ -552,17 +536,19 @@ address    name
 11f03484   Pout_b
 11f03528   Pref_a
 11f03488   Pref_b
+0c01dffc   Pulse
 11f032c4   SAMPLING_FREQ
 11f034cc   SF_average
-0c01b404   SF_calculation
-0c01b3c0   SF_calculation_Constract
-0c019110   SVM_Calculation
-0c0190cc   SVM_Calculation_Init
-0c01e5c8   SW_Inst
+0c01b4c4   SF_calculation
+0c01b480   SF_calculation_Constract
+0c018728   SVM_Calculation
+0c0186e4   SVM_Calculation_Init
+0c01dfe8   SW_Inst
 11f03514   Slot_Num
+0c018234   SwDuration
 11f034f8   TS
 11f032c8   TS_SAMPLE
-0c01e628   TS_conv
+0c01e188   TS_conv
 11f03438   T_fnd
 11f03504   T_trans
 11f03510   Table_num
@@ -573,20 +559,22 @@ address    name
 11f032b8   Tcon
 11f034c8   TotalCounter
 11f0337c   Ts
-0c01ec78   U_tr
-0c01e140   VCT2_InitFunc
-0c018fe0   VValt
+0c01e878   U_tr
+0c01db80   VCT2_InitFunc
+0c0180f0   VV_Pattern
+0c01e7d8   VV_time
+0c018000   VValt
 11f033ac   V_amp
 11f03324   V_limit
-0c01ec80   V_tr
+0c01e880   V_tr
 11f03318   Vdc
 11f034d0   Vdc_command
 11f0331c   Vdc_sens
 11f03374   Vector_Number
 11f03378   Vector_Number2
 11f03370   Vector_Times
-11f033f0   Vector_cont_count
-11f033ec   Vector_cont_time
+11f033ec   Vector_cont_count
+11f033e8   Vector_cont_time
 11f03478   Vest_a
 11f0347c   Vest_b
 11f033b0   Vref_a
@@ -612,7 +600,7 @@ address    name
 11f03314   Vw_res
 11f03474   Vwn_ref
 11f03454   Vwu
-0c01ec88   W_tr
+0c01e888   W_tr
 11e03380   _CSL2_intcDispatcherDummy
 11e032c8   _CSL_intcGlobalDisable
 11e0333c   _CSL_intcGlobalExcepClear
@@ -623,88 +611,80 @@ address    name
 11e03278   _CSL_intcInterruptRestore
 11e0326c   _CSL_intcInterruptSet
 11e03290   _CSL_intcQueryInterruptStatus
-0c021c00   __TI_CINIT_Base
-0c021c18   __TI_CINIT_Limit
-0c021bf8   __TI_Handler_Table_Base
-0c021c00   __TI_Handler_Table_Limit
+0c020fe8   __TI_CINIT_Base
+0c021000   __TI_CINIT_Limit
+0c020fdc   __TI_Handler_Table_Base
+0c020fe4   __TI_Handler_Table_Limit
 UNDEFED    __TI_INITARRAY_Base
 UNDEFED    __TI_INITARRAY_Limit
 11f032b8   __TI_STACK_END
 00001000   __TI_STACK_SIZE
 11f032b8   __TI_STATIC_BASE
-00000800   __TI_SYSMEM_SIZE
 UNDEFED    __TI_TLS_INIT_Base
 UNDEFED    __TI_TLS_INIT_Limit
 00000001   __TI_args_main
-0c01e020   __TI_cpp_init
-0c01e260   __TI_decompress_none
-0c01e280   __TI_decompress_rle24
-0c01f7f8   __TI_enable_exit_profile_output
+0c01da60   __TI_cpp_init
+0c01dc80   __TI_decompress_none
+0c01dca0   __TI_decompress_rle24
+0c01ebf8   __TI_enable_exit_profile_output
 ffffffff   __TI_pprof_out_hndl
 ffffffff   __TI_prof_data_size
 ffffffff   __TI_prof_data_start
-0c01d9c0   __TI_tls_init
+0c01d680   __TI_tls_init
 ffffffff   __binit__
-0c019f40   __c6xabi_divd
-0c01c0c0   __c6xabi_divf
-0c01d680   __c6xabi_divi
-0c01d840   __c6xabi_divu
-0c01e200   __c6xabi_errno_addr
-0c01dda0   __c6xabi_fixdu
-0c01de20   __c6xabi_fixfu
-0c01e080   __c6xabi_frcmpyd_div
-0c01e0e0   __c6xabi_llshru
+0c01a000   __c6xabi_divd
+0c01c180   __c6xabi_divf
+0c01d340   __c6xabi_divi
+0c01d500   __c6xabi_divu
+0c01dc40   __c6xabi_errno_addr
+0c01d7e0   __c6xabi_fixdu
+0c01d860   __c6xabi_fixfu
+0c01dac0   __c6xabi_frcmpyd_div
+0c01db20   __c6xabi_llshru
 ffffffff   __c_args__
-0c01d680   __divi
-0c01d840   __divu
-0c01f838   __errno
-0c01e180   _args_main
-0c01d2a0   _auto_init_elf
-0c01dea0   _c_int00
-0c01f7f0   _cleanup_ptr
-0c01f7f4   _dtors_ptr
-0c01f830   _lock
-0c01da80   _minit
+0c01d340   __divi
+0c01d500   __divu
+0c01ebfc   __errno
+0c01dbc0   _args_main
+0c01cf60   _auto_init_elf
+0c01d8e0   _c_int00
+0c01ebf0   _cleanup_ptr
+0c01ebf4   _dtors_ptr
 11f002b0   _mwSinTbl
-0c01e220   _nop
 11f022b8   _stack
-0c01ee80   _sys_memory
-0c01f834   _unlock
-0c01e240   abort
-0c01f820   alt_num
-0c01c980   atan
-0c01ccc0   atan2
+0c01dc60   abort
+0c01c7c0   atan
+0c01cb00   atan2
 11f034c4   average_time
 ffffffff   binit
 11e02688   cic0Out2Evnt
-0c01d3a0   copy_in
-0c01d540   cvt_float_uint16_array
-0c01d510   cvt_to_float_from_u32
-0c01d4e8   cvt_to_u32_from_float
-0c01f788   data
-0c01e600   data_offset
-0c01e5e0   data_offset_tmp
+0c01d060   copy_in
+0c01d200   cvt_float_uint16_array
+0c01d1d0   cvt_to_float_from_u32
+0c01d1a8   cvt_to_u32_from_float
+0c01eb88   data
+0c01e160   data_offset
+0c01e140   data_offset_tmp
 11f03508   delta_omega
 11f03390   du
 11f03394   dv
 11f03398   dw
 11f033c8   dwt
-0c01f838   errno
-0c01dfa0   evmI2CInit
-0c01d900   exit
+0c01ebfc   errno
+0c01d9e0   evmI2CInit
+0c01d5c0   exit
 11f033c0   f_ref
 11f03364   flag_wrm
-0c01c340   free
-0c01ce40   frexp
-0c01d4d0   get_float_from_uint16
-0c01d4a0   get_uint32_from_uint8_byte
+0c01cc80   frexp
+0c01d190   get_float_from_uint16
+0c01d160   get_uint32_from_uint8_byte
 11f00270   gpio_int_map
 11f03544   hGpio
 11f03530   i
-0c019dd4   i2cEepromGetStatus2
-0c019c58   i2cEepromRead2
-0c0198c8   i2cEepromWriteBlock2
-0c019b40   i2cEepromWriteByteAddr2
+0c019e94   i2cEepromGetStatus2
+0c019d18   i2cEepromRead2
+0c019988   i2cEepromWriteBlock2
+0c019c00   i2cEepromWriteByteAddr2
 11f03338   ia_res
 11f0333c   ib_res
 11f03348   id_res
@@ -716,39 +696,37 @@ ffffffff   binit
 11f03304   iv_res
 11f03308   iw_res
 11f03534   j
-0c01ec70   lap_time
-0c01e5a8   lpf
-0c01e4c0   m
-0c01e1e0   main
-0c01cfc0   malloc
-11f033d8   max
-0c01db20   memcpy
-0c01d760   memset
-11f033dc   min
+0c01e7d0   lap_time
+0c01dfc8   lpf
+0c01dee0   m
+0c01dc20   main
+11f033d4   max
+0c01d740   memcpy
+0c01d420   memset
+11f033d8   min
 11f033b8   mod
-0c01dc60   modf
-0c01bdc4   mw_Osal_platformSpiCsEnter
-0c01bdb0   mw_Osal_platformSpiCsExit
+0c01be84   mw_Osal_platformSpiCsEnter
+0c01be70   mw_Osal_platformSpiCsExit
 11f034f0   mw_gp__CSL_intcCpuIntrTable
-0c01b9b8   mw_nor_erase
-0c01b94c   mw_nor_get_details
-0c01b8d8   mw_nor_init
-0c01b824   mw_nor_read
-0c01b760   mw_nor_write
-0c01bd90   mw_platform_delaycycles
-0c01bd24   mw_platform_device_close
-0c01bce4   mw_platform_device_erase_block
-0c01bc0c   mw_platform_device_open
-0c01bb70   mw_platform_device_read
-0c01bad4   mw_platform_device_write
+0c01ba78   mw_nor_erase
+0c01ba0c   mw_nor_get_details
+0c01b998   mw_nor_init
+0c01b8e4   mw_nor_read
+0c01b820   mw_nor_write
+0c01be50   mw_platform_delaycycles
+0c01bde4   mw_platform_device_close
+0c01bda4   mw_platform_device_erase_block
+0c01bccc   mw_platform_device_open
+0c01bc30   mw_platform_device_read
+0c01bb94   mw_platform_device_write
 11f034f4   mw_platform_errno
 11e03360   mw_setVect
-0c01b238   mw_spi_claim
-0c01b1cc   mw_spi_cmd
-0c01b1c0   mw_spi_cmd_read
-0c01b1b0   mw_spi_cmd_write
-0c01b144   mw_spi_release
-0c01b000   mw_spi_xfer
+0c01b2f8   mw_spi_claim
+0c01b28c   mw_spi_cmd
+0c01b280   mw_spi_cmd_read
+0c01b270   mw_spi_cmd_write
+0c01b204   mw_spi_release
+0c01b0c0   mw_spi_xfer
 11e02904   mwintc_clearSysInterrupt
 11e028ec   mwintc_disableHostInterrupt
 11e028d4   mwintc_disableSysInterrupt
@@ -759,12 +737,12 @@ ffffffff   binit
 11e02714   mwintc_setup
 11e02794   mwintc_setup2
 11e025f4   mwintc_setupApp
-11f033e4   n
+11f033e0   n
 11f034d8   noptime
 11f0339c   numLines
 11f03330   offset_count
 11f03334   offset_time
-0c01e620   omega_data
+0c01e180   omega_data
 11f034dc   omega_max
 11f033bc   omega_ref
 11f033a0   out_swp
@@ -772,15 +750,14 @@ ffffffff   binit
 11f03428   phase_sector
 11f03440   phase_sector_trans
 11f03368   phi_2d
-0c01bac0   platform_write
-0c01f828   pulse_sector
+0c01bb80   platform_write
 11f034b4   sf_ave
 11f034b8   sf_ave2
 11f034a0   sf_u_ave
 11f034a8   sf_v_ave
 11f034b0   sf_w_ave
-0c01e630   siny
-0c01d140   sqrt
+0c01e190   siny
+0c01ce00   sqrt
 11f03320   t_res
 11f0332c   tau_L
 11f034e4   tmr1regs
@@ -801,34 +778,34 @@ ffffffff   binit
 11f03350   w1
 11f032cc   wInput_VV1
 11f032e8   wInput_VV1_time
-11f03424   wInput_VV1_time_veiw
+11f03420   wInput_VV1_time_veiw
 11f032d0   wInput_VV2
 11f032ec   wInput_VV2_time
-11f0340c   wInput_VV2_time_tmp
-11f03408   wInput_VV2_time_tmp2
-11f03420   wInput_VV2_time_veiw
-11f03404   wInput_VV2_tmp
+11f03408   wInput_VV2_time_tmp
+11f03404   wInput_VV2_time_tmp2
+11f0341c   wInput_VV2_time_veiw
+11f03400   wInput_VV2_tmp
 11f032d4   wInput_VV3
 11f032f0   wInput_VV3_time
-11f03414   wInput_VV3_time_tmp
-11f03410   wInput_VV3_tmp
+11f03410   wInput_VV3_time_tmp
+11f0340c   wInput_VV3_tmp
 11f032d8   wInput_VV4
 11f032f4   wInput_VV4_time
-11f0341c   wInput_VV4_time_tmp
-11f03418   wInput_VV4_tmp
+11f03418   wInput_VV4_time_tmp
+11f03414   wInput_VV4_tmp
 11f032dc   wInput_VV5
 11f032f8   wInput_VV5_time
 11f032e0   wInput_VV6
 11f032fc   wInput_VV6_time
 11f032e4   wInput_VV7
-11f03400   wInput_VV_time_tmp
+11f033fc   wInput_VV_time_tmp
 11f034ac   w_sw
 11f03358   wre
 11f0335c   wrm
 11f03360   wrm_filter
 11f03354   ws
 11f033c4   wt
-11f033e0   z
+11f033dc   z
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -836,141 +813,137 @@ GLOBAL SYMBOLS: SORTED BY Symbol Address
 address    name
 --------   ----
 00000001   __TI_args_main
-00000800   __TI_SYSMEM_SIZE
 00001000   __TI_STACK_SIZE
-0c018000   IntrFunc1
-0c018adc   IntrFunc0
-0c018fe0   VValt
-0c0190cc   SVM_Calculation_Init
-0c019110   SVM_Calculation
-0c0198c8   i2cEepromWriteBlock2
-0c019b40   i2cEepromWriteByteAddr2
-0c019c58   i2cEepromRead2
-0c019dd4   i2cEepromGetStatus2
-0c019f40   __c6xabi_divd
-0c01a500   DAC_da_out2
-0c01a628   DAC_sync_init
-0c01a6c0   DAC_init
-0c01a734   DAC_get_fpga_ver
-0c01a758   DAC_da_set_range2
-0c01a848   DAC_da_set_range
-0c01a8c0   DAC_da_set_offset2
-0c01a954   DAC_da_set_offset
-0c01a998   DAC_da_out
-0c01aac0   IM_InitState
-0c01ab34   IM_InitParam
-0c01ace0   IM_Construct
-0c01afa8   IM_CalcStatus
-0c01b000   mw_spi_xfer
-0c01b144   mw_spi_release
-0c01b1b0   mw_spi_cmd_write
-0c01b1c0   mw_spi_cmd_read
-0c01b1cc   mw_spi_cmd
-0c01b238   mw_spi_claim
-0c01b3c0   SF_calculation_Constract
-0c01b404   SF_calculation
-0c01b500   Inv_UpdateOutputVoltage
-0c01b6b8   Inv_Construct
-0c01b6f8   Inv_CalcSwitchingCount
-0c01b72c   Inv_CalcNVRFromVV
-0c01b760   mw_nor_write
-0c01b824   mw_nor_read
-0c01b8d8   mw_nor_init
-0c01b94c   mw_nor_get_details
-0c01b9b8   mw_nor_erase
-0c01bac0   platform_write
-0c01bad4   mw_platform_device_write
-0c01bb70   mw_platform_device_read
-0c01bc0c   mw_platform_device_open
-0c01bce4   mw_platform_device_erase_block
-0c01bd24   mw_platform_device_close
-0c01bd90   mw_platform_delaycycles
-0c01bdb0   mw_Osal_platformSpiCsExit
-0c01bdc4   mw_Osal_platformSpiCsEnter
-0c01be00   MW_main
-0c01c0c0   __c6xabi_divf
-0c01c340   free
-0c01c5c0   FPGA_write_f32
-0c01c64c   FPGA_write
-0c01c6c8   FPGA_read_f32
-0c01c740   FPGA_read
-0c01c78c   FPGA_get_fpga_ver
-0c01c7c0   DSP_InputEncoderData
-0c01c92c   DSP_InputADData
-0c01c980   atan
-0c01ccc0   atan2
-0c01ce40   frexp
-0c01cfc0   malloc
-0c01d140   sqrt
-0c01d2a0   _auto_init_elf
-0c01d3a0   copy_in
-0c01d4a0   get_uint32_from_uint8_byte
-0c01d4d0   get_float_from_uint16
-0c01d4e8   cvt_to_u32_from_float
-0c01d510   cvt_to_float_from_u32
-0c01d540   cvt_float_uint16_array
-0c01d5a0   LPF_Construct
-0c01d5c8   LPF_CalcBDiff
-0c01d680   __c6xabi_divi
-0c01d680   __divi
-0c01d760   memset
-0c01d840   __c6xabi_divu
-0c01d840   __divu
-0c01d900   exit
-0c01d9c0   __TI_tls_init
-0c01da80   _minit
-0c01db20   memcpy
-0c01dc60   modf
-0c01dda0   __c6xabi_fixdu
-0c01de20   __c6xabi_fixfu
-0c01dea0   _c_int00
-0c01df20   PEV_init
-0c01df64   PEV_get_fpga_ver
-0c01dfa0   evmI2CInit
-0c01e020   __TI_cpp_init
-0c01e080   __c6xabi_frcmpyd_div
-0c01e0e0   __c6xabi_llshru
-0c01e140   VCT2_InitFunc
-0c01e150   InitVect3
-0c01e16c   InitVect2
-0c01e180   _args_main
-0c01e1c0   CSL_GPIO_open
-0c01e1e0   main
-0c01e200   __c6xabi_errno_addr
-0c01e220   _nop
-0c01e240   C$$EXIT
-0c01e240   abort
-0c01e260   __TI_decompress_none
-0c01e280   __TI_decompress_rle24
-0c01e4c0   m
-0c01e5a8   lpf
-0c01e5c8   SW_Inst
-0c01e5e0   data_offset_tmp
-0c01e600   data_offset
-0c01e620   omega_data
-0c01e628   TS_conv
-0c01e630   siny
-0c01ec70   lap_time
-0c01ec78   U_tr
-0c01ec80   V_tr
-0c01ec88   W_tr
-0c01ee70   EMIF_IntrErr_sts
-0c01ee80   _sys_memory
-0c01f788   data
-0c01f7f0   _cleanup_ptr
-0c01f7f4   _dtors_ptr
-0c01f7f8   __TI_enable_exit_profile_output
-0c01f808   ENC_data
-0c01f820   alt_num
-0c01f828   pulse_sector
-0c01f830   _lock
-0c01f834   _unlock
-0c01f838   __errno
-0c01f838   errno
-0c021bf8   __TI_Handler_Table_Base
-0c021c00   __TI_CINIT_Base
-0c021c00   __TI_Handler_Table_Limit
-0c021c18   __TI_CINIT_Limit
+0c018000   VValt
+0c0180f0   VV_Pattern
+0c018234   SwDuration
+0c0186e4   SVM_Calculation_Init
+0c018728   SVM_Calculation
+0c018e80   IntrFunc1
+0c01942c   IntrFunc0
+0c019988   i2cEepromWriteBlock2
+0c019c00   i2cEepromWriteByteAddr2
+0c019d18   i2cEepromRead2
+0c019e94   i2cEepromGetStatus2
+0c01a000   __c6xabi_divd
+0c01a5c0   DAC_da_out2
+0c01a6e8   DAC_sync_init
+0c01a780   DAC_init
+0c01a7f4   DAC_get_fpga_ver
+0c01a818   DAC_da_set_range2
+0c01a908   DAC_da_set_range
+0c01a980   DAC_da_set_offset2
+0c01aa14   DAC_da_set_offset
+0c01aa58   DAC_da_out
+0c01ab80   IM_InitState
+0c01abf4   IM_InitParam
+0c01ada0   IM_Construct
+0c01b068   IM_CalcStatus
+0c01b0c0   mw_spi_xfer
+0c01b204   mw_spi_release
+0c01b270   mw_spi_cmd_write
+0c01b280   mw_spi_cmd_read
+0c01b28c   mw_spi_cmd
+0c01b2f8   mw_spi_claim
+0c01b480   SF_calculation_Constract
+0c01b4c4   SF_calculation
+0c01b5c0   Inv_UpdateOutputVoltage
+0c01b778   Inv_Construct
+0c01b7b8   Inv_CalcSwitchingCount
+0c01b7ec   Inv_CalcNVRFromVV
+0c01b820   mw_nor_write
+0c01b8e4   mw_nor_read
+0c01b998   mw_nor_init
+0c01ba0c   mw_nor_get_details
+0c01ba78   mw_nor_erase
+0c01bb80   platform_write
+0c01bb94   mw_platform_device_write
+0c01bc30   mw_platform_device_read
+0c01bccc   mw_platform_device_open
+0c01bda4   mw_platform_device_erase_block
+0c01bde4   mw_platform_device_close
+0c01be50   mw_platform_delaycycles
+0c01be70   mw_Osal_platformSpiCsExit
+0c01be84   mw_Osal_platformSpiCsEnter
+0c01bec0   MW_main
+0c01c180   __c6xabi_divf
+0c01c400   FPGA_write_f32
+0c01c48c   FPGA_write
+0c01c508   FPGA_read_f32
+0c01c580   FPGA_read
+0c01c5cc   FPGA_get_fpga_ver
+0c01c600   DSP_InputEncoderData
+0c01c76c   DSP_InputADData
+0c01c7c0   atan
+0c01cb00   atan2
+0c01cc80   frexp
+0c01ce00   sqrt
+0c01cf60   _auto_init_elf
+0c01d060   copy_in
+0c01d160   get_uint32_from_uint8_byte
+0c01d190   get_float_from_uint16
+0c01d1a8   cvt_to_u32_from_float
+0c01d1d0   cvt_to_float_from_u32
+0c01d200   cvt_float_uint16_array
+0c01d260   LPF_Construct
+0c01d288   LPF_CalcBDiff
+0c01d340   __c6xabi_divi
+0c01d340   __divi
+0c01d420   memset
+0c01d500   __c6xabi_divu
+0c01d500   __divu
+0c01d5c0   exit
+0c01d680   __TI_tls_init
+0c01d740   memcpy
+0c01d7e0   __c6xabi_fixdu
+0c01d860   __c6xabi_fixfu
+0c01d8e0   _c_int00
+0c01d960   PEV_init
+0c01d9a4   PEV_get_fpga_ver
+0c01d9e0   evmI2CInit
+0c01da60   __TI_cpp_init
+0c01dac0   __c6xabi_frcmpyd_div
+0c01db20   __c6xabi_llshru
+0c01db80   VCT2_InitFunc
+0c01db90   InitVect3
+0c01dbac   InitVect2
+0c01dbc0   _args_main
+0c01dc00   CSL_GPIO_open
+0c01dc20   main
+0c01dc40   __c6xabi_errno_addr
+0c01dc60   C$$EXIT
+0c01dc60   abort
+0c01dc80   __TI_decompress_none
+0c01dca0   __TI_decompress_rle24
+0c01dee0   m
+0c01dfc8   lpf
+0c01dfe8   SW_Inst
+0c01dffc   Pulse
+0c01e140   data_offset_tmp
+0c01e160   data_offset
+0c01e180   omega_data
+0c01e188   TS_conv
+0c01e190   siny
+0c01e7d0   lap_time
+0c01e7d8   VV_time
+0c01e800   Conf1
+0c01e828   Conf2
+0c01e850   Conf3
+0c01e878   U_tr
+0c01e880   V_tr
+0c01e888   W_tr
+0c01ea70   EMIF_IntrErr_sts
+0c01eb88   data
+0c01ebf0   _cleanup_ptr
+0c01ebf4   _dtors_ptr
+0c01ebf8   __TI_enable_exit_profile_output
+0c01ebfc   __errno
+0c01ebfc   errno
+0c01ec00   ENC_data
+0c020fdc   __TI_Handler_Table_Base
+0c020fe4   __TI_Handler_Table_Limit
+0c020fe8   __TI_CINIT_Base
+0c021000   __TI_CINIT_Limit
 11e00000   PEV_updown_set_mode
 11e00034   PEV_updown_read_cnt
 11e00078   PEV_updown_init_maxcount
@@ -1175,29 +1148,29 @@ address    name
 11f033c0   f_ref
 11f033c4   wt
 11f033c8   dwt
-11f033cc   Flag_FreqRamp
-11f033d0   Counter_up
-11f033d4   Counter_down
-11f033d8   max
-11f033dc   min
-11f033e0   z
-11f033e4   n
-11f033e8   Check
-11f033ec   Vector_cont_time
-11f033f0   Vector_cont_count
-11f033f4   Flag_ini
-11f033f8   Flag_stop
-11f033fc   Flag_stop2
-11f03400   wInput_VV_time_tmp
-11f03404   wInput_VV2_tmp
-11f03408   wInput_VV2_time_tmp2
-11f0340c   wInput_VV2_time_tmp
-11f03410   wInput_VV3_tmp
-11f03414   wInput_VV3_time_tmp
-11f03418   wInput_VV4_tmp
-11f0341c   wInput_VV4_time_tmp
-11f03420   wInput_VV2_time_veiw
-11f03424   wInput_VV1_time_veiw
+11f033cc   Counter_up
+11f033d0   Counter_down
+11f033d4   max
+11f033d8   min
+11f033dc   z
+11f033e0   n
+11f033e4   Check
+11f033e8   Vector_cont_time
+11f033ec   Vector_cont_count
+11f033f0   Flag_ini
+11f033f4   Flag_stop
+11f033f8   Flag_stop2
+11f033fc   wInput_VV_time_tmp
+11f03400   wInput_VV2_tmp
+11f03404   wInput_VV2_time_tmp2
+11f03408   wInput_VV2_time_tmp
+11f0340c   wInput_VV3_tmp
+11f03410   wInput_VV3_time_tmp
+11f03414   wInput_VV4_tmp
+11f03418   wInput_VV4_time_tmp
+11f0341c   wInput_VV2_time_veiw
+11f03420   wInput_VV1_time_veiw
+11f03424   Init_write
 11f03428   phase_sector
 11f0342c   trans_time
 11f03430   trans_count
@@ -1281,4 +1254,4 @@ UNDEFED    __TI_INITARRAY_Limit
 UNDEFED    __TI_TLS_INIT_Base
 UNDEFED    __TI_TLS_INIT_Limit
 
-[445 symbols]
+[441 symbols]

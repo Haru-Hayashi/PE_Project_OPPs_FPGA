@@ -149,7 +149,7 @@
       <i_NormWin1Win4>1</i_NormWin1Win4>
       <Button_Name>Win2</Button_Name>
       <bColorPickerIndex>16</bColorPickerIndex>
-      <bNormVariableIndex>27</bNormVariableIndex>
+      <bNormVariableIndex>26</bNormVariableIndex>
     </BindWaveNormRec>
     <BindWaveNormRec>
       <PrebNormPosValue>0</PrebNormPosValue>
@@ -909,7 +909,6 @@
     <string>dwt</string>
     <string>ENC_delta</string>
     <string>f_ref</string>
-    <string>Flag_FreqRamp</string>
     <string>Flag_ini</string>
     <string>Flag_Init</string>
     <string>Flag_omega_max</string>
@@ -926,6 +925,7 @@
     <string>ia_res</string>
     <string>ib_res</string>
     <string>id_res</string>
+    <string>Init_write</string>
     <string>iq_res</string>
     <string>iu_res</string>
     <string>iv_res</string>

@@ -1,5 +1,7 @@
 #include "moduration.h"
 #include "math.h"
+#include "UserDefined.h"
+#include "Common.h"
 
 #define PI 3.14159265358979
 #define PI2_3 2.094395102
@@ -223,6 +225,104 @@ void SVM_Calculation(SVM_Calc *svm, float V_a, float V_b,float Vdc, float Ts){
     svm->tw = tw;
 
     return;
+}
+
+void SwDuration(Pulse_Pattern* Pulse, float Ts) {
+    int i;
+    int j=1;
+    // 0～pi/3 rad, pi/3～pi/6 rad, pi/6~～pi/2 radの3区間に分類
+	int count_u = 0, count_v = 0, count_w = 0; 
+
+    // 初期化
+    for (i = 0; i <= Angle_Num; i++) {
+		Pulse->alpha_u[i] = 0;
+        Pulse->alpha_v[i] = 0;
+        Pulse->alpha_w[i] = 0;
+        Pulse->t_u[i] = 0;
+        Pulse->t_v[i] = 0;
+        Pulse->t_w[i] = 0;
+	}
+
+    // 分類処理
+    for (i = 0; i < 8; i++) {
+        if (Pulse->alpha[i] < 0.523598) {
+            Pulse->alpha_u[count_u++] = Pulse->alpha[i]; // 範囲1に格納(0～pi/3)
+        } else if (Pulse->alpha[i] < PI13) {
+            Pulse->alpha_w[count_w++] = Pulse->alpha[i]; // 範囲2に格納(pi/3～pi/6)
+        } else if (Pulse->alpha[i] < PI12) {
+            Pulse->alpha_v[count_v++] = Pulse->alpha[i]; // 範囲3に格納(pi/6~～pi/2)
+        }
+    }
+    // ↑このときcountは0から始めり最大8にインクリメント。つまり角度の数になる。
+    // t_u,v,wは[0]～[count]、alpha_u,v,wは[0]～[count-1]の範囲で値を持つ
+
+    // u相のオンオフ出力時間を計算
+    Pulse->t_u[0] = Pulse->alpha_u[0]/PI02*Ts;
+    for(i=1; i<count_u; ++i){
+        Pulse->t_u[i] = (Pulse->alpha_u[i]-Pulse->alpha_u[i-1])/PI02*Ts;
+    }
+    Pulse->t_u[count_u] = (PI16-Pulse->alpha_u[count_u-1])/PI02*Ts;
+
+    // v相のオンオフ出力時間を計算
+    Pulse->t_v[0] = (Pulse->alpha_v[0]-PI13)/PI02*Ts;
+    for(i=1; i<count_v; ++i){
+        Pulse->t_v[i] = (Pulse->alpha_v[i]-Pulse->alpha_v[i-1])/PI02*Ts;
+    }
+    Pulse->t_v[count_v] = (PI12-Pulse->alpha_v[count_v-1])/PI02*Ts;
+
+    // w相のオンオフ出力時間を計算
+    Pulse->t_w[0] = (Pulse->alpha_w[0]-PI16)/PI02*Ts;
+    for(i=1; i<count_w; ++i){
+        Pulse->t_w[i] = (Pulse->alpha_w[i]-Pulse->alpha_w[i-1])/PI02*Ts;
+    }
+    Pulse->t_w[count_w] = (PI13-Pulse->alpha_w[count_w-1])/PI02*Ts;
+    // 逆順にする処理
+    // (配列の最初の要素と最後の要素を交換し、次に2番目の要素と倒数2番目の要素を交換を繰り返す)
+    for (i = 0; i <= count_w / 2; ++i) {
+        // i番目と (count_w - 1 - i)番目の要素を交換
+        float temp = Pulse->t_w[i];
+        Pulse->t_w[i] = Pulse->t_w[count_w - i];
+        Pulse->t_w[count_w - i] = temp;
+    }
+}
+
+void VV_Pattern(Pulse_Pattern* Pulse) {
+
+    int len_u = Angle_Num+1;
+    int len_v = Angle_Num+1;
+    int len_w = Angle_Num+1;
+    int idx_u = 0, idx_v = 0, idx_w = 0;
+    float current_time = 0.0f;
+    int num_patterns = 0;
+
+    // すべての時間を統合して処理
+    while (idx_u < len_u || idx_v < len_v || idx_w < len_w) {
+        // 次のイベント時間を決定
+        float next_time = 1e9; // 非常に大きな値
+        if (idx_u < len_u) next_time = (next_time > Pulse->t_u[idx_u]) ? Pulse->t_u[idx_u] : next_time;
+        if (idx_v < len_v) next_time = (next_time > Pulse->t_v[idx_v]) ? Pulse->t_v[idx_v] : next_time;
+        if (idx_w < len_w) next_time = (next_time > Pulse->t_w[idx_w]) ? Pulse->t_w[idx_w] : next_time;
+
+        // 現在の状態を計算
+        int current_state = 0;
+        if (idx_u % 2 == 0) current_state |= 0x01; // uがオンなら
+        if (idx_v % 2 == 0) current_state |= 0x02; // vがオンなら
+        if (idx_w % 2 == 0) current_state |= 0x04; // wがオンなら
+
+        // スイッチングパターンと持続時間を記録
+        Pulse->VV_Num[num_patterns] = current_state;
+        Pulse->VV_time[num_patterns] = next_time - current_time;
+        (num_patterns)++;
+
+        // 時刻を更新
+        current_time = next_time;
+
+        // イベントインデックスを更新
+        if (idx_u < len_u && Pulse->t_u[idx_u] == next_time) idx_u++;
+        if (idx_v < len_v && Pulse->t_v[idx_v] == next_time) idx_v++;
+        if (idx_w < len_w && Pulse->t_w[idx_w] == next_time) idx_w++;
+    }
+
 }
 
 

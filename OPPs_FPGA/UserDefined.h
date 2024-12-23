@@ -32,6 +32,9 @@
 #define I1_EPSILON (1e-3) //-2
 #define EPSILON (1e-3)
 
+// OPPsのスイッチング角の数
+#define Angle_Num 8
+
 // 定格速度で最大変調率 → Vdc/(sqrt(2)*360)=0.5539
 #define K_VF 0.5539
 
