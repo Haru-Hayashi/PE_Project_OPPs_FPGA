@@ -1,24 +1,25 @@
 average_time 11f034c4 FLOAT 1
 Check 11f033e4 INT 3
-Conf1 c01e5e8 FLOAT 20 9
-Conf2 c01e610 FLOAT 20 9
-Conf3 c01e638 FLOAT 20 9
+Conf1 c01e590 FLOAT 20 9
+Conf2 c01e5b8 FLOAT 20 9
+Conf3 c01e5e0 FLOAT 20 9
+Conf_int 11f0351c INT 3
 Counter_down 11f033d0 INT 3
 Counter_up 11f033cc INT 3
-data c01e970 FLOAT 20 8
-data_offset c01df48 FLOAT 20 8
-data_offset_tmp c01df28 FLOAT 20 8
+data c01e918 FLOAT 20 8
+data_offset c01def0 FLOAT 20 8
+data_offset_tmp c01ded0 FLOAT 20 8
 delta_omega 11f03508 FLOAT 1
 du 11f03390 INT 3
 dv 11f03394 INT 3
 dw 11f03398 INT 3
 dwt 11f033c8 FLOAT 1
-ENC_data c01e9e8 FLOAT 20 2
+ENC_data c01e990 FLOAT 20 2
 ENC_delta 11f03328 INT 3
 f_ref 11f033c0 FLOAT 1
 Flag_ini 11f033f0 INT 3
 Flag_Init 11f0343c INT 3
-Flag_omega_max 11f03538 INT 3
+Flag_omega_max 11f0353c INT 3
 Flag_OPP 11f03444 INT 3
 Flag_stop 11f033f4 INT 3
 Flag_stop2 11f033f8 INT 3
@@ -28,7 +29,7 @@ flag_wrm 11f03364 INT 3
 FPGA_Ts 11f03500 INT 3
 FS 11f034fc FLOAT 1
 Hysteresis_Band 11f03494 FLOAT 1
-i 11f03530 INT 3
+i 11f03534 INT 3
 ia_res 11f03338 FLOAT 1
 ib_res 11f0333c FLOAT 1
 id_res 11f03348 FLOAT 1
@@ -37,8 +38,8 @@ iq_res 11f0334c FLOAT 1
 iu_res 11f03300 FLOAT 1
 iv_res 11f03304 FLOAT 1
 iw_res 11f03308 FLOAT 1
-j 11f03534 INT 3
-lap_time c01e5b8 FLOAT 20 2
+j 11f03538 INT 3
+lap_time c01e560 FLOAT 20 2
 max 11f033d4 FLOAT 1
 min 11f033d8 FLOAT 1
 mod 11f033b8 FLOAT 1
@@ -47,12 +48,12 @@ noptime 11f034d8 INT 3
 numLines 11f0339c INT 3
 offset_count 11f03330 INT 3
 offset_time 11f03334 FLOAT 1
-omega_data c01df68 FLOAT 20 2
+omega_data c01df10 FLOAT 20 2
 omega_max 11f034dc INT 3
 omega_ref 11f033bc FLOAT 1
 out_swp 11f033a0 INT 3
 p2_theta 11f0336c FLOAT 1
-Perr_a 11f0352c FLOAT 1
+Perr_a 11f03530 FLOAT 1
 Perr_b 11f0348c FLOAT 1
 Perr_nrm 11f03490 FLOAT 1
 phase_sector 11f03428 INT 3
@@ -60,7 +61,7 @@ phase_sector_trans 11f03440 INT 3
 phi_2d 11f03368 FLOAT 1
 Pout_a 11f03480 FLOAT 1
 Pout_b 11f03484 FLOAT 1
-Pref_a 11f03528 FLOAT 1
+Pref_a 11f0352c FLOAT 1
 Pref_b 11f03488 FLOAT 1
 SAMPLING_FREQ 11f032c4 FLOAT 1
 sf_ave 11f034b4 FLOAT 1
@@ -85,18 +86,18 @@ trans_count 11f03430 INT 3
 trans_time 11f0342c FLOAT 1
 trans_time_first 11f034e0 INT 3
 TS 11f034f8 FLOAT 1
-TS_conv c01df70 FLOAT 20 2
+TS_conv c01df18 FLOAT 20 2
 TS_SAMPLE 11f032c8 FLOAT 1
 u 11f03384 INT 3
 u_sw 11f0349c INT 3
-U_tr c01e660 INT 20 2
+U_tr c01e608 INT 20 2
 uvw_sw 11f034bc FLOAT 1
 uvw_sw_total 11f034c0 FLOAT 1
 v 11f03388 INT 3
 V_amp 11f033ac FLOAT 1
 V_limit 11f03324 FLOAT 1
 v_sw 11f034a4 INT 3
-V_tr c01e668 INT 20 2
+V_tr c01e610 INT 20 2
 va_res 11f03340 FLOAT 1
 vb_res 11f03344 FLOAT 1
 Vdc 11f03318 FLOAT 1
@@ -114,20 +115,20 @@ Vref_b 11f033b4 FLOAT 1
 Vref_nrm 11f033a4 FLOAT 1
 Vref_nrm_abs 11f033a8 FLOAT 1
 Vtheta 11f03498 FLOAT 1
-Vu 11f0351c FLOAT 1
+Vu 11f03520 FLOAT 1
 Vu_inv 11f03448 FLOAT 1
 Vu_ref 11f03460 FLOAT 1
 Vu_res 11f0330c FLOAT 1
 Vun_ref 11f0346c FLOAT 1
 Vuv 11f03458 FLOAT 1
-Vv 11f03520 FLOAT 1
+Vv 11f03524 FLOAT 1
 Vv_inv 11f0344c FLOAT 1
 Vv_ref 11f03464 FLOAT 1
 Vv_res 11f03310 FLOAT 1
-VV_time c01e5c0 FLOAT 20 9
+VV_time c01e568 FLOAT 20 9
 Vvn_ref 11f03470 FLOAT 1
 Vvw 11f0345c FLOAT 1
-Vw 11f03524 FLOAT 1
+Vw 11f03528 FLOAT 1
 Vw_inv 11f03450 FLOAT 1
 Vw_ref 11f03468 FLOAT 1
 Vw_res 11f03314 FLOAT 1
@@ -136,7 +137,7 @@ Vwu 11f03454 FLOAT 1
 w 11f0338c INT 3
 w1 11f03350 FLOAT 1
 w_sw 11f034ac INT 3
-W_tr c01e670 INT 20 2
+W_tr c01e618 INT 20 2
 wInput_VV1 11f032cc INT 3
 wInput_VV1_time 11f032e8 FLOAT 1
 wInput_VV1_time_veiw 11f03420 FLOAT 1

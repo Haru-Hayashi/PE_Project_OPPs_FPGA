@@ -27,6 +27,7 @@ typedef struct{
     int count_w;
     int VV_Num[Angle_Num+1];
     float VV_time[Angle_Num+1];
+    int num_patterns;
 } Pulse_Pattern;
 
 void SVM_Calculation(SVM_Calc *svm, float V_a, float V_b, float Vdc, float Ts);

@@ -297,23 +297,25 @@ void SwDuration(Pulse_Pattern* Pulse, float Ts) {
     }
     Pulse->t_w[count_w] = PI16/PI02*Ts;;
 
-    Pulse->count_u = count_u;
-    Pulse->count_v = count_v;
-    Pulse->count_w = count_w;
+    // Pulse->count_u = count_u;
+    // Pulse->count_v = count_v;
+    // Pulse->count_w = count_w;
 }
 
 void VV_Pattern(Pulse_Pattern* Pulse) {
+    int i;
 
-    // int len_u = Angle_Num+1;
-    // int len_v = Angle_Num+1;
-    // int len_w = Angle_Num+1;
-    int len_u = Pulse->count_u;
-    int len_v = Pulse->count_v;
-    int len_w = Pulse->count_w;
-    int idx_u = 0, idx_v = 0, idx_w = 0;
-    float current_time = 0.0;
-    int num_patterns = 0;
-    
+    // int len_u = Pulse->count_u;
+    // int len_v = Pulse->count_v;
+    // int len_w = Pulse->count_w;
+    // int idx_u = 0, idx_v = 0, idx_w = 0;
+    // float current_time = 0.0;
+    // int num_patterns = 0;
+
+    // // 初期化
+    // for (i = 0; i <= Angle_Num; i++) {
+    //     Pulse->VV_time[i] = 0;
+	// }
 
     // // すべての時間を統合して処理
     // while ((idx_u + idx_v + idx_w) < (Angle_Num + 1)) {
@@ -333,14 +335,15 @@ void VV_Pattern(Pulse_Pattern* Pulse) {
     //     Pulse->VV_Num[num_patterns] = current_state;
     //     Pulse->VV_time[num_patterns] = (next_time - current_time)*1e6;
     //     num_patterns++;
+    //     Pulse->num_patterns++;
 
     //     // 時刻を更新
     //     current_time = next_time;
 
     //     // イベントインデックスを更新
-    //     if (idx_u < len_u && Pulse->t_u[idx_u] == next_time) idx_u++;
-    //     if (idx_v < len_v && Pulse->t_v[idx_v] == next_time) idx_v++;
-    //     if (idx_w < len_w && Pulse->t_w[idx_w] == next_time) idx_w++;
+    //     if (idx_u < len_u && Pulse->t_u[idx_u] != 0 && Pulse->t_u[idx_u] == next_time) idx_u++;
+    //     if (idx_v < len_v && Pulse->t_v[idx_v] != 0 && Pulse->t_v[idx_v] == next_time) idx_v++;
+    //     if (idx_w < len_w && Pulse->t_w[idx_w] != 0 && Pulse->t_w[idx_w] == next_time) idx_w++;
     // }
 
 }

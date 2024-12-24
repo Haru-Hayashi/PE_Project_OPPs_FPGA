@@ -196,6 +196,7 @@ float VV_time[9];
 float Conf1[9];
 float Conf2[9];
 float Conf3[9];
+int Conf_int;
 
 //線間電圧、相電圧、電圧積分値計算
 float Vu_inv = 0.0, Vv_inv = 0.0, Vw_inv = 0.0;
@@ -391,7 +392,7 @@ interrupt void IntrFunc1(void){
 		Conf3[i] = Pulse.t_w[i]*1e6;
 		// Conf1[i] = Pulse.VV_Num[i];
 		// Conf2[i] = Pulse.VV_time[i];
-		// Conf3[0] = Pulse.count_w;
+		// Conf_int = Pulse.num_patterns;
 	}
 
 	// TS_conv[0] = TS*1e6;
